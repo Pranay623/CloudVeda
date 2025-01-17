@@ -10,7 +10,7 @@ const Landing = () => {
       <div className="max-w-full mx-auto px-6 md:px-12 lg:px-24">
         <header className="flex justify-between items-center py-">
           <div className="flex items-center space-x-3">
-            <img src={Logo} alt="Cloudveda Logo" className="w-26 h-20" />
+            <img src={Logo} alt="Cloudveda Logo" className="min-w-20 min-h-20" />
             <h1 className="text-2xl font-bold text-[#2D493B]"></h1>
           </div>
           <nav className="space-x-20 hidden md:flex">
@@ -54,7 +54,7 @@ const Landing = () => {
             <img
               src={img}
               alt="Meditation Illustration"
-              className="w-full h-auto"
+              className="w-1/2 h-auto"
             />
           </div>
         </main>
