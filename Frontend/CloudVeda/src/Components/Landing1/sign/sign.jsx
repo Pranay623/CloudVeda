@@ -14,7 +14,7 @@ function SignInUpForm() {
             <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="text" placeholder="Name" />
             <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="email" placeholder="Email" />
             <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="password" placeholder="Password" />
-            <Component.Button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700" type="submit">Sign Up</Component.Button>
+            <Component.Button className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]" type="submit">Sign Up</Component.Button>
           </Component.Form>
         </Component.SignUpContainer>
 
@@ -23,8 +23,8 @@ function SignInUpForm() {
             <Component.Title className="text-3xl font-bold mb-4">Sign in</Component.Title>
             <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="email" placeholder="Email" />
             <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="password" placeholder="Password" />
-            <Component.Button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700" type="submit">Sign In</Component.Button>
-            <Component.chotabutton className="text-blue-600 mt-2 hover:underline">Forget Password</Component.chotabutton>
+            <Component.Button className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]" type="submit">Sign In</Component.Button>
+            <Component.chotabutton className="text-[#2D493B] mt-2 hover:underline">Forget Password</Component.chotabutton>
           </Component.Form>
         </Component.SignInContainer>
 
@@ -45,7 +45,7 @@ function SignInUpForm() {
               <Component.Paragraph className="mb-4">
                 Enter Your personal details and start your journey with us
               </Component.Paragraph>
-              <Component.GhostButton className="px-4 py-2 text-blue-600 bg-white border border-blue-600 rounded hover:bg-blue-100" onClick={() => toggle(false)}>
+              <Component.GhostButton className="px-4 py-2 text-blue-600 bg-white border border-[#2D493B] rounded hover:bg-blue-100" onClick={() => toggle(false)}>
                 Sign Up
               </Component.GhostButton> 
             </Component.RightOverlayPanel>
