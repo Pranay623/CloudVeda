@@ -1,16 +1,20 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/cldveda 4.png";
 import img from "../../assets/img1.png";
 import {MdOutlineRestaurantMenu} from 'react-icons/md';
 import {GiHamburgerMenu} from 'react-icons/gi';
 
 const Landing = () => {
+  const navigate=useNavigate();
+
+
   return (
     <div className="min-h-screen bg-[#F9F8F6] flex items-center justify-center">
       <div className="max-w-full mx-auto px-6 md:px-12 lg:px-24">
         <header className="flex justify-between items-center py-">
           <div className="flex items-center space-x-3">
-            <img src={Logo} alt="Cloudveda Logo" className="min-w-20 min-h-20" />
+            <img src={Logo} alt="Cloudveda Logo" className="min-w-26 min-h-20" />
             <h1 className="text-2xl font-bold text-[#2D493B]"></h1>
           </div>
           <nav className="space-x-20 hidden md:flex">
@@ -24,12 +28,12 @@ const Landing = () => {
               Experts
             </a>
           </nav>
-          <a
-            href="#"
+          <div
+          onClick={()=>{navigate('/login')}}
             className="py-2 px-4 bg-[#2D493B] text-white rounded-lg hover:bg-[#1F382A]"
           >
             Login/Register
-          </a>
+          </div>
         </header>
 
         <main className="mt-12 flex flex-col lg:flex-row items-center justify-between">
@@ -54,7 +58,7 @@ const Landing = () => {
             <img
               src={img}
               alt="Meditation Illustration"
-              className="w-1/2 h-auto"
+              className="w-full h-auto"
             />
           </div>
         </main>
