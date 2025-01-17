@@ -15,7 +15,10 @@ app.use(bodyParser.json());
 
 app.use('/api', auth)
 
-app.use((req, res) => {});
+// app.use('/api', (req, res, next) => {
+//     console.log("Request Body:", req.body); // Logs incoming data
+//     next();
+// });
 
 
 connectDB();
