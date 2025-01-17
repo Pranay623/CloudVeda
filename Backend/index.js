@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import mongoose from 'mongoose';
 import express from 'express'
-import connectDB from '../db/connect.js';
-import auth from '../router/auth.router.js';
+import connectDB from './db/connect.js';
+import auth from './router/auth.router.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
  
