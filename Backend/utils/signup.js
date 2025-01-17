@@ -5,6 +5,12 @@ async function createUser(userData) {
   try {
     const { name, email, password } = userData;
 
+    // Log the userData to debug
+    console.log("Received userData:", userData);
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Password:", password);
+
     // Validate inputs
     if (!name || !email || !password) {
       throw new Error("All fields (name, email, password) are required");
