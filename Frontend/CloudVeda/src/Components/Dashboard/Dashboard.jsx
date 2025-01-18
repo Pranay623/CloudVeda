@@ -16,6 +16,7 @@ const Dashboard = () => {
         }
         const data = await response.json();
         setExperts(data); // Assuming the API returns an array of experts
+
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -33,11 +34,9 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
-
       <div className="bg-[#FFFDF5] min-h-screen py-8 px-4 md:px-16 mt-0">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mt-8">
           {/* Guidelines Section */}
-
           <div className="md:w-1/2">
             <h1 className="text-4xl font-bold text-green-900 mb-4">Guidelines</h1>
             <p className="text-gray-700 text-sm md:text-base leading-relaxed">

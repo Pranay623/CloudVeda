@@ -8,7 +8,7 @@ import Camera from "./Components/Camera/Everything.jsx";
 
 import Everything from "./Components/Camera/Everything.jsx";
 import MainUploadPage from "./Components/Camera/MainUploadPage.jsx";
-
+import Chatbot from "./Components/Chatbot/ChatBot.jsx";
 import About from "./Components/About/About.jsx"
 
 
@@ -30,7 +30,8 @@ function App() {
         <Route path="/camera/head" element={<Camera />} />
 
         <Route path="/about" element={<About/>}/>
-
+        <Route path="/chat" element={<Chatbot/>}/>
+        
       </Routes>
     </Router>
   );
