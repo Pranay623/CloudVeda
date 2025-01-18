@@ -19,14 +19,14 @@ const Navbar = () => {
     }
   };
   return (
-    <header className="flex justify-between items-center py-4 px-6 ">
-      <div className="flex items-center space-x-3">
+    <header className="  flex justify-between items-center py-4 px-6 bg-[#FFFDF5] ">
+      <div className=" flex items-center space-x-3">
         <img src={Logo} alt="Cloudveda Logo" className="min-w-26 min-h-20" />
       </div>
       <nav className="space-x-20 hidden md:flex">
-        <a href="#" className="text-[#2D493B] hover:text-[#1F382A] " onClick={()=> navigate('/')}>Home</a>
-        <a href="#" className="text-[#2D493B] hover:text-[#1F382A]">About</a>
-        <a href="#" className="text-[#2D493B] hover:text-[#1F382A]">Experts</a>
+        <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300 " onClick={()=> navigate('/')}>Home</a>
+        <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300" onClick={()=> navigate('/about')}>About</a>
+        <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300">Experts</a>
       </nav>
       <div
         onClick={handleNavigation}
