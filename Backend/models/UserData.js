@@ -93,6 +93,7 @@ const UserDataSchema = new mongoose.Schema({
   additional_details: { type: Object },
   created_at: { type: Date, default: Date.now },
   status: { type: String, default: "Pending" },
+
   skintone: {
     type: String,
     enum: ['Fair', 'Medium', 'Olive', 'Dark'],
@@ -130,7 +131,9 @@ health_index:{
     enum: ['Good', 'Average', 'Poor'],
 },
   
+
 });
 
 const UserData = mongoose.model("UserData", UserDataSchema);
+
 export default UserData;

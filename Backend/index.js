@@ -22,7 +22,6 @@ app.use('/image', pointsRouter);
 app.use('/api', expertsRouter);
 app.use('/report', report);
 
-
 // app.use('/api', (req, res, next) => {
 //     console.log("Request Body:", req.body); // Logs incoming data
 //     next();
