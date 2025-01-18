@@ -10,6 +10,7 @@ import Everything from "./Components/Camera/Everything.jsx";
 import MainUploadPage from "./Components/Camera/MainUploadPage.jsx";
 import Chatbot from "./Components/Chatbot/ChatBot.jsx";
 import About from "./Components/About/About.jsx"
+import { Profile } from "./Components/Profile/Profile.jsx";
 
 import Profile from "./Components/Profile/Profile.jsx";
 
@@ -34,7 +35,11 @@ function App() {
 
         <Route path="/about" element={<About/>}/>
         <Route path="/chat" element={<Chatbot/>}/>
+<<<<<<< HEAD
+        <Route path="/profile" element={<Profile/>}/>
+=======
         <Route path="/thankyou" element={<ThankYou />} />
+>>>>>>> be2b2849654724fe77d3c4fde8cb2335dba85c36
         
       </Routes>
     </Router>

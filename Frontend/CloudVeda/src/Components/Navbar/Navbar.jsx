@@ -28,11 +28,9 @@ const Navbar = () => {
         <img src={Logo} alt="Cloudveda Logo" className="min-w-26 min-h-20" />
       </div>
       <nav className="space-x-20 hidden md:flex">
-
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300 " onClick={()=> navigate('/')}>Home</a>
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300" onClick={()=> navigate('/about')}>About</a>
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300" onClick={()=> navigate('/dashboard')}>Experts</a>
-
       </nav>
       <div
         onClick={handleNavigation}

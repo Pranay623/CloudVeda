@@ -4,9 +4,10 @@ import Card from "./Card";
 import Footer from '../Footer/Footer';
 
 const Dashboard = () => {
-  const [currentCard, setCurrentCard] = useState(0); 
-  const [experts, setExperts] = useState([]); 
-  const [isLoading, setIsLoading] = useState(true); 
+  const [currentCard, setCurrentCard] = useState(0);
+  const [experts, setExperts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false); // For controlling animation classes
 
   useEffect(() => {
     const fetchExperts = async () => {
@@ -16,8 +17,7 @@ const Dashboard = () => {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        setExperts(data); // Assuming the API returns an array of experts
-
+        setExperts(data);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -29,7 +29,11 @@ const Dashboard = () => {
   }, []);
 
   const handleNextCard = () => {
-    setCurrentCard((prevCard) => (prevCard + 1) % experts.length); 
+    setIsAnimating(true); // Trigger animation
+    setTimeout(() => {
+      setCurrentCard((prevCard) => (prevCard + 1) % experts.length);
+      setIsAnimating(false); // Reset animation state
+    }, 500); // Match the duration of the animation
   };
 
   return (
@@ -37,7 +41,6 @@ const Dashboard = () => {
       <Navbar />
       <div className="bg-[#FFFDF5] min-h-screen py-8 px-4 md:px-16 mt-0">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mt-8">
-          {/* Guidelines Section */}
           <div className="md:w-1/2">
             <h1 className="text-4xl font-bold text-green-900 mb-4">Guidelines</h1>
             <p className="text-gray-700 text-sm md:text-base leading-relaxed">
@@ -56,17 +59,14 @@ const Dashboard = () => {
               Let’s embark on a journey toward better health and wellness!
             </p>
           </div>
-
-          
           <div className="flex items-center space-x-4 mt-2 mr-14">
             {isLoading ? (
               <p>Loading...</p>
             ) : experts.length > 0 ? (
               <>
-                
-                <Card expert={experts[currentCard]} />
-
-                
+                <div className={isAnimating ? "card-exit" : "card-enter"}>
+                  <Card expert={experts[currentCard]} />
+                </div>
                 <button
                   className="bg-green-800 text-white p-4 rounded-full hover:bg-green-700"
                   onClick={handleNextCard}
@@ -93,7 +93,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
