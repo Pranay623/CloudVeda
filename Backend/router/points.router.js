@@ -3,7 +3,6 @@ import deductPoints from '../controllers/points.controller.js';
 
 const router = express.Router();
 
-// Deduct points route
 router.post('/deduct-points', async (req, res) => {
     const { userId } = req.body;
 

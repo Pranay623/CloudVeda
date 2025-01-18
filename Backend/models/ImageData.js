@@ -42,6 +42,11 @@ const ImageDataSchema = new mongoose.Schema({
         type: String,
         enum: ['Good', 'Average', 'Poor'],
     },
+    expert_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
 
 })
 

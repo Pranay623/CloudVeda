@@ -12,8 +12,8 @@ router.post('/signup', createUser);
 
 router.post(
     "/userdata",
-    upload,  // Use the previously configured upload middleware here
-    userDataController.saveUserData  // Save the user data after file upload
+    upload,
+    userDataController.saveUserData
   );
 
 router.get('/userdata', userDataController.getUserData);
