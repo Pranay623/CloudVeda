@@ -1,12 +1,19 @@
-import React from 'react'
-import AllCameras from './AllCameras'
+import React from "react";
+import Camera from "./Camera";
+import Navbar from "../Navbar/Navbar";
 
-const Camera = () => {
+const Everything = () => {
   return (
-    <div>
-      <AllCameras/>
+    <>
+    
+    <Navbar/>
+    <div className="bg-[#FFFDF5] h-full p-5 flex justify-center items-center">
+      <div className=" border-rad rounded-xl">
+        <Camera />
+      </div>
     </div>
-  )
-}
+    </>
+  );
+};
 
-export default Camera
+export default Everything;

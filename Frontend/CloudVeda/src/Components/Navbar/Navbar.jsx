@@ -19,8 +19,10 @@ const Navbar = () => {
     }
   };
   return (
-    <header className="  flex justify-between items-center py-4 px-6 bg-[#FFFDF5] ">
-      <div className=" flex items-center space-x-3">
+
+    <header className="flex bg-[#FFFDF5] shadow-lg justify-between items-center py-4 px-6 ">
+      <div className="flex items-center space-x-3">
+
         <img src={Logo} alt="Cloudveda Logo" className="min-w-26 min-h-20" />
       </div>
       <nav className="space-x-20 hidden md:flex">
