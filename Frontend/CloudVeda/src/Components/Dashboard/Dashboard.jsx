@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Navbar from "../Landing1/Navbar";
 import Card from "./Card";
 
+
 const Dashboard = () => {
   const [currentCard, setCurrentCard] = useState(0); // Track which card is visible
 
@@ -11,6 +12,7 @@ const Dashboard = () => {
   }
   return (
     <>
+
       
       <Navbar />
       
