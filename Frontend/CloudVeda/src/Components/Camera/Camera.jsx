@@ -54,6 +54,7 @@ const Camera = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
+        
       <div className="relative mb-4">
         <Webcam
           ref={webcamRef}
