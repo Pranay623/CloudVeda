@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/cldveda 4.png";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace this with real authentication logic
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
-    setIsLoggedIn(!!authToken); // Set isLoggedIn to true if authToken exists
+    setIsLoggedIn(!!authToken); 
   }, []);
 
   const handleNavigation = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
       <nav className="space-x-20 hidden md:flex">
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300 " onClick={()=> navigate('/')}>Home</a>
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300" onClick={()=> navigate('/about')}>About</a>
-        <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300">Experts</a>
+        <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300" onClick={()=> navigate('/dashboard')}>Experts</a>
       </nav>
       <div
         onClick={handleNavigation}

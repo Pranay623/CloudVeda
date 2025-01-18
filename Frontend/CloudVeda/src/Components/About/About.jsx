@@ -10,7 +10,7 @@ const About = () => {
 
 
         <div className="bg-[#FFFDF5]  flex flex-col lg:flex-row items-start">
-      {/* Text Content */}
+      
       <div className="lg:w-1/2 text-left ml-12 mt-20">
         <h1 className='text-[#1F382A] text-3xl '><strong>About the Health Analysis and Evaluation System</strong></h1><br/>
         <p><strong>Purpose:</strong> Our system leverages advanced image and video analysis techniques to assess facial and nail characteristics, offering valuable insights for personalized health evaluation.</p><br/>
