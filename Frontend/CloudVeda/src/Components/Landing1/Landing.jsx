@@ -7,6 +7,15 @@ import Navbar from "../Navbar/Navbar";
 const Landing = () => {
   const navigate = useNavigate();
 
+  const handleGetStarted = () => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      navigate("/dashboard"); // Navigate to dashboard if logged in
+    } else {
+      navigate("/login"); // Navigate to login if not logged in
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#FFFDF5] flex items-center justify-center">
       <div className="max-w-full mx-auto px-6 md:px-12 lg:px-24">
@@ -23,7 +32,10 @@ const Landing = () => {
                 analysis powered by AI and Ayurveda.
               </p>
             </div>
-            <div onClick={()=>{navigate('/login')}} className="mb-10 py-3 px-6 bg-[#2D493B] text-white rounded-lg text-lg hover:bg-[#1F382A] inline-block">
+            <div
+              onClick={handleGetStarted}
+              className="mb-10 py-3 px-6 bg-[#2D493B] text-white rounded-lg text-lg hover:bg-[#1F382A] inline-block cursor-pointer"
+            >
               Get Started →
             </div>
           </div>
