@@ -20,7 +20,7 @@ app.use('/api', auth);
 app.use('/image', mlDataRouter);
 app.use('/image', pointsRouter);
 app.use('/api', expertsRouter);
-app.use('/api', report);
+app.use('/report', report);
 
 // app.use('/api', (req, res, next) => {
 //     console.log("Request Body:", req.body); // Logs incoming data
