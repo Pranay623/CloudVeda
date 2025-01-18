@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import mlDataRouter from './router/mlData.router.js';
 import pointsRouter from './router/points.router.js';
 import expertsRouter from './router/getExperts.js';
+import emailRoutes from './router/emailRoutes.js';
 // import report from './router/report.router.js';
 const app = express();
 
@@ -27,7 +28,7 @@ app.use('/api', expertsRouter);
 //     next();
 // });
 
-
+app.use("/api/email", emailRoutes);
 connectDB();
 
 mongoose.connection.once('open', () => {

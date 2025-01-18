@@ -9,5 +9,4 @@ router.post('/img', saveImageData);
 router.post('/ml',mlresponse)
 router.get('/health-analysis', getHealthAnalysis);
 
-
 export default router;
