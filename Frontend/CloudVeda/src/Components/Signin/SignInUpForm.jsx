@@ -113,6 +113,14 @@ function SignInUpForm() {
               value={formData.password}
               onChange={handleChange}
             />
+            <Component.Input
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+              type="choice"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
             <Component.Button
               className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]"
               type="submit"
@@ -124,7 +132,7 @@ function SignInUpForm() {
 
         {/* Sign In Form */}
         <Component.SignInContainer signinIn={signin}>
-          <Component.Form className="p-8">
+          <Component.Form className="p-8" onSubmit={handleSubmit}>
             <Component.Title className="text-3xl font-bold mb-4">
               {signin ? "Sign in" : "Create Account"}
             </Component.Title>
@@ -147,6 +155,7 @@ function SignInUpForm() {
             <Component.Button
               className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]"
               type="submit"
+              
             >
               {signin ? "Sign In" : "Sign Up"}
             </Component.Button>

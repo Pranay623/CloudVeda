@@ -1,23 +1,19 @@
 
 import React, { useState } from 'react'
-import Navbar from "../Landing1/Navbar";
+import Navbar from "../Navbar/Navbar";
 import Card from "./Card";
 
 
 const Dashboard = () => {
   const [currentCard, setCurrentCard] = useState(0); // Track which card is visible
+  
 
   const handleNextCard = () => {
     setCurrentCard((prevCard) => (prevCard + 1) % 2); // Toggle between 2 cards (0 and 1)
   }
   return (
     <>
-
-      
       <Navbar />
-      
-
-      
       <div className="bg-cream min-h-screen py-8 px-4 md:px-16 mt-20">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
           
@@ -39,8 +35,8 @@ const Dashboard = () => {
           
           <div className="flex items-center space-x-4 mt-2 mr-14">
   
-   <Card/>
-   <Card/>
+          <Card/>
+          <Card/>
   
 
   {/* Arrow Button */}
