@@ -8,7 +8,7 @@ const videoConstraints = {
 
 const Camera = () => {
   const webcamRef = useRef(null);
-  const [url, setUrl] = useState(null);
+  const [photos, setPhotos] = useState([]); // State to store array of captured photos
   const [mediaError, setMediaError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,8 +16,7 @@ const Camera = () => {
   // Create a stable reference for capturePhoto
   const capturePhoto = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setUrl(imageSrc);
-    console.log(imageSrc);
+    setPhotos((prevPhotos) => [...prevPhotos, imageSrc]); // Add captured photo to array
   }, []);
 
   // Handle user media events (if needed)
@@ -48,47 +47,49 @@ const Camera = () => {
     };
   }, [capturePhoto]);
 
-  // Function to send the image to the API
-  const uploadImage = async () => {
-    if (!url) return;
-  
+  // Function to send the images to the API
+  const uploadImages = async () => {
+    if (photos.length === 0) return;
+
     setLoading(true);
     setError(null);
-  
-    const formData = new FormData();
-    const imageBlob = await fetch(url)
-      .then((res) => res.blob())
-      .catch((err) => {
-        console.error("Error fetching image:", err);
-        setError("Failed to fetch image.");
-      });
-  
-    if (imageBlob) {
-      formData.append("file", imageBlob, "user-image.png");
-  
-      try {
-        const response = await fetch("http://127.0.0.1:5000/analyze_face", {
-          method: "POST",
-          body: formData,
-        });
-  
-        if (response.ok) {
-          console.log("Image uploaded successfully!");
-        } else {
-          const errorText = await response.text();
-          console.error("Failed to upload image:", errorText);
-          setError(`Failed to upload image: ${errorText}`);
+
+    try {
+      const formData = new FormData();
+
+      // Loop through all captured photos and append them to formData
+      for (let i = 0; i < photos.length; i++) {
+        const imageBlob = await fetch(photos[i])
+          .then((res) => res.blob())
+          .catch((err) => {
+            console.error("Error fetching image:", err);
+            setError("Failed to fetch image.");
+          });
+
+        if (imageBlob) {
+          formData.append("file", imageBlob, `user-image-${i}.png`);
         }
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        setError("Error uploading image.");
-      } finally {
-        setLoading(false);
       }
+
+      const response = await fetch("http://127.0.0.1:5000/analyze_face", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log("Images uploaded successfully!");
+      } else {
+        const errorText = await response.text();
+        console.error("Failed to upload images:", errorText);
+        setError(`Failed to upload images: ${errorText}`);
+      }
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      setError("Error uploading images.");
+    } finally {
+      setLoading(false);
     }
   };
-  
-  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -103,7 +104,7 @@ const Camera = () => {
           mirrored={true}
           className="rounded-lg border-4 border-gray-700 shadow-lg"
         />
-        {url && (
+        {photos.length > 0 && (
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-lg flex items-center justify-center">
             <p className="text-white text-2xl">Photo Captured!</p>
           </div>
@@ -123,9 +124,7 @@ const Camera = () => {
         </button>
         <button
           className="m-2 px-6 py-3 bg-[#6D2B2B] text-white rounded-md hover:bg-[#933c3c] focus:outline-none transition duration-300 ease-in-out"
-          onClick={() => {
-            setUrl(null);
-          }}
+          onClick={() => setPhotos([])} // Reset photos array
         >
           Refresh
         </button>
@@ -133,9 +132,16 @@ const Camera = () => {
 
       {mediaError && <p className="text-red-500 text-center mt-4">{mediaError}</p>}
 
-      {url && (
+      {photos.length > 0 && (
         <div className="mt-4">
-          <img src={url} alt="Screenshot" className="rounded-lg shadow-lg" />
+          {photos.map((photo, index) => (
+            <img
+              key={index}
+              src={photo}
+              alt={`Captured ${index + 1}`}
+              className="rounded-lg shadow-lg mb-4"
+            />
+          ))}
         </div>
       )}
 
@@ -144,9 +150,9 @@ const Camera = () => {
 
       <button
         className="m-2 mt-6 px-6 py-3 bg-[#025A4E] text-white rounded-md hover:bg-[#018d75] focus:outline-none transition duration-300 ease-in-out"
-        onClick={uploadImage}
+        onClick={uploadImages}
       >
-        Upload Image
+        Upload Images
       </button>
     </div>
   );

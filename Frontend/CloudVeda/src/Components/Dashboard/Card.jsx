@@ -5,7 +5,7 @@ const Card = () => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate('/camera');  
+    navigate('/uploadphotos');  
   };
 
   return (
