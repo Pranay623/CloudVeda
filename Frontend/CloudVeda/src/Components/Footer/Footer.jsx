@@ -40,6 +40,10 @@ const Navigate=useNavigate();
       href={'/about'}
       className="text-gray-400 hover:text-white cursor-pointer"
     >
+
+
+
+      
       Contact
     </a>
   </li>
