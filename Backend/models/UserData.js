@@ -4,24 +4,24 @@ const UserDataSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
+    // required: true,
   },
   age: {
     type: Number,
-    required: true,
+    // required: true,
   },
   weight: {
     type: Number,
-    required: true,
+    // required: true,
   },
   height: {
     type: Number,
-    required: true,
+    // required: true,
   },
   mood: {
     type: String,
     enum: ["Happy", "Neutral", "Stressed", "Sad", "Anxious", "Calm"],
-    required: true,
+    // required: true,
   },
   activity_level: {
     type: String,
@@ -44,12 +44,12 @@ const UserDataSchema = new mongoose.Schema({
       "Balanced diet",
       "High-carb, low-protein",
     ],
-    required: true,
+    // required: true,
   },
   sleep_patterns: {
     type: String,
     enum: ["Less than 5 hours", "5-6 hours", "7-8 hours", "8+ hours"],
-    required: true,
+    // required: true,
   },
   health_conditions: {
     type: [String],
@@ -62,7 +62,7 @@ const UserDataSchema = new mongoose.Schema({
       "Arthritis",
       "Anxiety/Depression",
     ],
-    required: true,
+    // required: true,
   },
   medications: {
     type: [String],
@@ -73,17 +73,17 @@ const UserDataSchema = new mongoose.Schema({
       "Birth control",
       "Pain relief",
     ],
-    required: true,
+    // required: true,
   },
   stress_levels: {
     type: String,
     enum: ["Very low", "Low", "Moderate", "High", "Very high"],
-    required: true,
+    // required: true,
   },
   hydration_levels: {
     type: String,
     enum: ["Very low", "Low", "Adequate", "High"],
-    required: true,
+    // required: true,
   },
   additional_details: { type: Object },
   created_at: { type: Date, default: Date.now },
@@ -96,4 +96,5 @@ const UserDataSchema = new mongoose.Schema({
  },
 });
 
-exports.default = mongoose.model("UserData", UserDataSchema);
+const UserData = mongoose.model("UserData", UserDataSchema);
+export default UserData;

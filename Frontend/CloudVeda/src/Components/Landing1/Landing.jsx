@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
+import Logo from "../../assets/cldveda 4.png";
+
 import img from "../../assets/img1.png";
 import {MdOutlineRestaurantMenu} from 'react-icons/md';
 import {GiHamburgerMenu} from 'react-icons/gi';
@@ -13,7 +15,9 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-[#FFFDF5] flex items-center justify-center">
       <div className="max-w-full mx-auto px-6 md:px-12 lg:px-24">
+
         <Navbar/>
+
 
         <main className="mt-12 flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 space-y-6">

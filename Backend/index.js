@@ -5,7 +5,7 @@ import connectDB from './db/connect.js';
 import auth from './router/auth.router.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
- 
+
 const app = express();
 
 app.use(cors());
@@ -29,4 +29,3 @@ mongoose.connection.once('open', () => {
       console.log(`Server is running on port ${3000}`)
     })
   })
-  
