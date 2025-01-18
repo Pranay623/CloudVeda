@@ -9,7 +9,7 @@ const UserDataSchema = new mongoose.Schema({
   expert_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
+    // required: true,
   },
   age: {
     type: Number,

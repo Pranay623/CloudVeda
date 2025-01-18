@@ -17,7 +17,7 @@ async function saveUserData(req, res) {
       medications,
       stress_levels,
       hydration_levels,
-      additional_details,
+      expert_id,
     } = req.body;
 
     // Validate user ID
@@ -25,9 +25,9 @@ async function saveUserData(req, res) {
       return res.status(400).json({ error: "User ID is required" });
     }
 
-    // Extract file URLs
-    const images = req.files.images ? req.files.images.map(file => file.path) : [];
-    const video = req.files.video ? req.files.video[0].path : null;
+    // // Extract file URLs
+    // const images = req.files.images ? req.files.images.map(file => file.path) : [];
+    // const video = req.files.video ? req.files.video[0].path : null;
 
     // Create a new UserData document
     const userData = new UserData({
@@ -43,10 +43,9 @@ async function saveUserData(req, res) {
       medications,
       stress_levels,
       hydration_levels,
-      additional_details: additional_details ? JSON.parse(additional_details) : {},
-      images,
-      video,
+      expert_id,
     });
+    
 
     // Save to MongoDB
     const savedUserData = await userData.save();
