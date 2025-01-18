@@ -23,11 +23,8 @@ function App() {
         <Route path="/login" element={<SignInUpForm />} />
         {/* <Route path="/" element={<Camera />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
-
         <Route path="/uploadphotos" element={<MainUploadPage/>} />
-       
         <Route path="/camera/" element={<Camera />} />
-
         <Route path="/about" element={<About/>}/>
         <Route path="/chat" element={<Chatbot/>}/>
         
