@@ -16,6 +16,6 @@ router.post(
     userDataController.saveUserData  // Save the user data after file upload
   );
 
-// router.get('/userdata', userDataController.getUserData);
+router.get('/userdata', userDataController.getUserData);
 
 export default router;
