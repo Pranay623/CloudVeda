@@ -45,3 +45,5 @@ CloudVeda is a full-stack application consisting of a client-side React applicat
 
 - `MONGO_URI`: The connection string for the MongoDB instance. Set in `docker-compose.yml`.
 
+##USER FLOW
+https://www.figma.com/board/sBQgeJBmbzYfVltIEUxwag/Untitled?node-id=1-2&t=R8kjzuR2DaSsrm76-1
