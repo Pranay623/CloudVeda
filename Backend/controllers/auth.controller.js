@@ -1,11 +1,18 @@
 import authService from '../utils/login.js';
 import userService from '../utils/signup.js';
+import User from '../models/User.js';
 
 async function login(req, res) {
     try {
         const { email, password } = req.body;
         const token = await authService.login(email, password);
-        res.status(200).json({ token });
+        const user = await User.findOne({ email: email });
+        res.status(200).json({
+            token: token,
+            user_id: user._id,
+            message: "Login successful",
+          });
+          
     } catch (error) {
         console.log(error);
         res.status(401).json({ message: error.message });
