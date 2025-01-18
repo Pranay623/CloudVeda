@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 async function createUser(userData) {
   try {
-    const { name, email, password } = userData;
+    const { name, email, password,role } = userData;
 
     // Log the userData to debug
     console.log("Received userData:", userData);
@@ -30,6 +30,7 @@ async function createUser(userData) {
       userName: name,
       email,
       password: hashedPassword,
+      roles:role,
     });
 
     // Save the user to the database
