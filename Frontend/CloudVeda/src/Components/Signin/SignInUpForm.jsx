@@ -53,7 +53,7 @@ function SignInUpForm() {
       }
 
       const token = data.token;
-      const id = data._id;
+      const id = data.user_id;
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);

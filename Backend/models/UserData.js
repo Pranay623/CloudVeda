@@ -95,11 +95,14 @@ const UserDataSchema = new mongoose.Schema({
   status: { type: String, default: "Pending" },
   images: {
     type: [String],
+    default: [],
   },
   video: {
     type: String,
+    default: null,
   },
 });
 
 const UserData = mongoose.model("UserData", UserDataSchema);
+
 export default UserData;
