@@ -1,4 +1,6 @@
 import UserData from "../models/UserData.js";
+import cookieParser from "cookie-parser";
+import 'dotenv/config';
 
 async function saveUserData(req, res) {
   try {
@@ -60,4 +62,23 @@ async function saveUserData(req, res) {
   }
 }
 
-export default { saveUserData };
+async function getUserData(req, res) {
+  try {
+    const { user_id } = req.params;
+
+    // Find user data by user ID
+    const userData = await UserData.findOne({ user_id });
+    res.status(200).json({
+      data: userData,
+    });
+}catch(error){
+    res.status(500).json({
+      error: `Error fetching user data: ${error.message}`,
+    });
+  }
+}
+
+export default { 
+    saveUserData,
+    getUserData 
+};
