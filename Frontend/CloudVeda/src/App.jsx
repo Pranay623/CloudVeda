@@ -12,6 +12,11 @@ import Chatbot from "./Components/Chatbot/ChatBot.jsx";
 import About from "./Components/About/About.jsx"
 import { Profile } from "./Components/Profile/Profile.jsx";
 
+import Profile from "./Components/Profile/Profile.jsx";
+
+import ThankYou from "./Components/thankyou.jsx";
+
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,9 +31,15 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/uploadphotos" element={<MainUploadPage/>} />
         <Route path="/camera/" element={<Camera />} />
+        <Route path="/profile" element={<Profile />} />
+
         <Route path="/about" element={<About/>}/>
         <Route path="/chat" element={<Chatbot/>}/>
+<<<<<<< HEAD
         <Route path="/profile" element={<Profile/>}/>
+=======
+        <Route path="/thankyou" element={<ThankYou />} />
+>>>>>>> be2b2849654724fe77d3c4fde8cb2335dba85c36
         
       </Routes>
     </Router>

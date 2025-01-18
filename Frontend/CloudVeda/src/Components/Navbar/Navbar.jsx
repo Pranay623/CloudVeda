@@ -20,7 +20,9 @@ const Navbar = () => {
   };
   return (
 
+
     <header className="flex bg-[#FFFDF5] justify-between items-center py-4 px-6 ">
+
       <div className="flex items-center space-x-3">
 
         <img src={Logo} alt="Cloudveda Logo" className="min-w-26 min-h-20" />
@@ -32,8 +34,7 @@ const Navbar = () => {
       </nav>
       <div
         onClick={handleNavigation}
-        className="py-2 px-4 bg-[#2D493B] text-white rounded-lg hover:bg-[#1F382A] cursor-pointer"
-      >
+        className="py-2 px-4 bg-[#2D493B] text-white rounded-lg hover:bg-[#1F382A] cursor-pointer">
         {isLoggedIn ? "Profile" : "Login/Register"}
       </div>
     </header>
