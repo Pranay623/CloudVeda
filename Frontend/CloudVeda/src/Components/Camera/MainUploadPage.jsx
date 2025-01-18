@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 const MainUploadPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const MainUploadPage = () => {
   };
 
   return (
+    <>
+    
     <div className=" h-screen bg-[#FFFDF5]">
       <Navbar />
       <div className=" max-h-screen bg-[#FFFDF5] p-6 flex justify-around  flex-col md:flex-row">
@@ -41,6 +44,8 @@ const MainUploadPage = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
