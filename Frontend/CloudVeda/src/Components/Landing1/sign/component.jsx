@@ -66,7 +66,7 @@ margin: 0;
 `;
 
 export const Input = styled.input`
-background-color: #eee;
+background-color: #eeee;
 border: none;
 padding: 12px 15px;
 margin: 8px 0;
@@ -86,7 +86,7 @@ width: 100%;
 export const Button = styled.button`
    border-radius: 20px;
    border: 1px solid #4a75c2;
-   background-color: #4a75c2;
+   
    color: #ffffff;
    font-size: 12px;
    font-weight: bold;
@@ -136,7 +136,7 @@ ${props =>
 `;
 
 export const Overlay = styled.div`
-background: #4a73d1;
+background: #025A4E;
 background-repeat: no-repeat;
 background-size: cover;
 background-position: 0 0;

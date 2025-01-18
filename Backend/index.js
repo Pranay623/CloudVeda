@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 
 app.use('/api', auth)
 
-
 // app.use('/api', (req, res, next) => {
 //     console.log("Request Body:", req.body); // Logs incoming data
 //     next();
@@ -30,4 +29,3 @@ mongoose.connection.once('open', () => {
       console.log(`Server is running on port ${3000}`)
     })
   })
-  // asda
