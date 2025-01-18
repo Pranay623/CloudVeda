@@ -1,12 +1,12 @@
 import React from 'react'
-import AllCameras from './AllCameras'
+import Camera from './Camera'
 
-const Camera = () => {
+const Everything = () => {
   return (
     <div>
-      <AllCameras/>
+      <Camera/>
     </div>
   )
 }
 
-export default Camera
+export default Everything
