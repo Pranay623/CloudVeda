@@ -36,7 +36,7 @@ const Camera = () => {
   
       try {
         // Send image to the ML API
-        const response = await fetch(`http://3.237.21.65:5000/analyze_${category}`, {
+        const response = await fetch(`http://172.31.77.145:5000/analyze_${category}`, {
           method: "POST",
           body: formData,
         });
