@@ -9,12 +9,3 @@
 
 // export default router;
 
-import express from 'express';
-import getGeminiResponse from '../controllers/aicontroller.js';
-
-const router = express.Router();
-
-// Define the POST route for generating a response using the Gemini model
-router.post('/', getGeminiResponse);
-
-module.exports = router;

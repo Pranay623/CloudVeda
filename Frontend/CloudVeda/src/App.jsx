@@ -10,7 +10,11 @@ import Everything from "./Components/Camera/Everything.jsx";
 import MainUploadPage from "./Components/Camera/MainUploadPage.jsx";
 import Chatbot from "./Components/Chatbot/ChatBot.jsx";
 import About from "./Components/About/About.jsx"
+
 import Profile from "./Components/Profile/Profile.jsx";
+
+import ThankYou from "./Components/thankyou.jsx";
+
 
 
 function App() {
@@ -24,14 +28,13 @@ function App() {
         <Route path="/login" element={<SignInUpForm />} />
         {/* <Route path="/" element={<Camera />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
-
         <Route path="/uploadphotos" element={<MainUploadPage/>} />
-       
         <Route path="/camera/" element={<Camera />} />
         <Route path="/profile" element={<Profile />} />
 
         <Route path="/about" element={<About/>}/>
         <Route path="/chat" element={<Chatbot/>}/>
+        <Route path="/thankyou" element={<ThankYou />} />
         
       </Routes>
     </Router>

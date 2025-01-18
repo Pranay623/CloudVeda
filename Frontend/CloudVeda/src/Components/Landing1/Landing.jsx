@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import img from "../../assets/img1.png";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -17,38 +18,40 @@ const Landing = () => {
   };
 
   return (
-    <div className=" bg-[#FFFDF5] flex items-center justify-center">
-      <div className="px-6 md:px-12 lg:px-24">
-        <Navbar />
-
-        <main className="mt-12 flex flex-col lg:flex-row items-center justify-between">
-          <div className="lg:w-1/2 space-y-6">
-            <div className="mb-10">
-              <h2 className="text-5xl mb-5 font-bold text-[#2D493B]">
-                Get Your Analysis Done Now
-              </h2>
-              <p className="text-[#6B7280] text-lg">
-                Unlock insights into your health with expert facial and nail
-                analysis powered by AI and Ayurveda.
-              </p>
+    <>
+      <div className=" bg-[#FFFDF5] flex items-center justify-center mb-14">
+        <div className="px-6 md:px-12 lg:px-24">
+          <Navbar />
+          <main className="mt-12 flex flex-col lg:flex-row items-center justify-between">
+            <div className="lg:w-1/2 space-y-6">
+              <div className="mb-10">
+                <h2 className="text-5xl mb-5 font-bold text-[#2D493B]">
+                  Get Your Analysis Done Now
+                </h2>
+                <p className="text-[#6B7280] text-lg">
+                  Unlock insights into your health with expert facial and nail
+                  analysis powered by AI and Ayurveda.
+                </p>
+              </div>
+              <div
+                onClick={handleGetStarted}
+                className="mb-10 py-3 px-6 bg-[#2D493B] text-white rounded-lg text-lg hover:bg-[#1F382A] inline-block cursor-pointer"
+              >
+                Get Started →
+              </div>
             </div>
-            <div
-              onClick={handleGetStarted}
-              className="mb-10 py-3 px-6 bg-[#2D493B] text-white rounded-lg text-lg hover:bg-[#1F382A] inline-block cursor-pointer"
-            >
-              Get Started →
+            <div className="mt-12 lg:mt-0 lg:w-1/2">
+              <img
+                src={img}
+                alt="Meditation Illustration"
+                className="w-full h-auto"
+              />
             </div>
-          </div>
-          <div className="mt-12 lg:mt-0 lg:w-1/2">
-            <img
-              src={img}
-              alt="Meditation Illustration"
-              className="w-full h-auto"
-            />
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

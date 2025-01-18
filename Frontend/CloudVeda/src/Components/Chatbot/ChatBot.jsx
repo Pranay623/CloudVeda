@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 const Chatbot = () => {
+  const navigate = useNavigate();
   const questions = [
     {
       id: 1,
@@ -104,24 +106,6 @@ const Chatbot = () => {
       type: "options",
       options: ["Very low", "Low", "Adequate", "High"],
     },
-    {
-      id: 12,
-      text: "Do you have any additional details you'd like to share?",
-      key: "additional_details",
-      type: "text",
-    },
-    // {
-    //   id: 13,
-    //   text: "Please upload any relevant images (e.g., photos of your nails, face) or videos.",
-    //   key: "images",
-    //   type: "file",
-    // },
-    // {
-    //   id: 14,
-    //   text: "If available, please upload a short video for analysis.",
-    //   key: "video",
-    //   type: "file",
-    // },
   ];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -133,34 +117,35 @@ const Chatbot = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      // Show the submit button after last question
       setIsSubmitted(true);
     }
   };
 
   const submitData = () => {
-    // Get the user_id and expert_id (You can replace these with actual values or pass them as props)
-    const user_id = "someUserId"; // Replace with actual user ID
-    const expert_id = localStorage.getItem("activeExpertId"); // Get expert ID from local storage
+    // Ensure this is executed in the browser
+    if (typeof window !== "undefined") {
+      const user_id = localStorage.getItem("userid");
+      const expert_id = localStorage.getItem("activeExpertId");
 
-    const formData = {
-      user_id,
-      expert_id,
-      ...responses,
-      status: "Pending",
-    };
+      const formData = {
+        user_id,
+        expert_id,
+        ...responses,
+        status: "Pending",
+      };
 
-    fetch("http://localhost:3000/api/userdata", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert("Thank you for sharing your details!");
-        // Optionally redirect to another page after submission
+      fetch("http://localhost:3000/api/userdata", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       })
-      .catch((err) => console.error("Error:", err));
+        .then((res) => res.json())
+        .then((data) => {
+          alert("Thank you for sharing your details!");
+          navigate("/uploadphotos");
+        })
+        .catch((err) => console.error("Error:", err));
+    }
   };
 
   return (
@@ -187,7 +172,7 @@ const Chatbot = () => {
               type="text"
               placeholder="Type your answer here..."
               className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onKeyPress={(e) => {
+              onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleResponse(
                     questions[currentQuestion].key,
@@ -203,7 +188,7 @@ const Chatbot = () => {
         {isSubmitted && (
           <button
             className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md"
-            onClick={submitData}
+            onClick={submitData} // Corrected from `onSubmit` to `onClick`
           >
             Submit Data
           </button>

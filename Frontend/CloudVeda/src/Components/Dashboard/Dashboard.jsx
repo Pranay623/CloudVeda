@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../Navbar/Navbar";
 import Card from "./Card";
+import Footer from '../Footer/Footer';
 
 const Dashboard = () => {
   const [currentCard, setCurrentCard] = useState(0); 
@@ -92,6 +93,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
