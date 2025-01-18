@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState, useEffect } from "react";
 import Webcam from "react-webcam";
 
 const videoConstraints = {
-  width:780,
+  width: 780,
   facingMode: "user",
 };
 
@@ -10,11 +10,14 @@ const Camera = () => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
   const [mediaError, setMediaError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // Create a stable reference for capturePhoto
   const capturePhoto = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setUrl(imageSrc);
+    console.log(imageSrc);
   }, []);
 
   // Handle user media events (if needed)
@@ -43,14 +46,56 @@ const Camera = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [capturePhoto]); // capturePhoto is stable due to useCallback
+  }, [capturePhoto]);
+
+  // Function to send the image to the API
+  const uploadImage = async () => {
+    if (!url) return;
+  
+    setLoading(true);
+    setError(null);
+  
+    const formData = new FormData();
+    const imageBlob = await fetch(url)
+      .then((res) => res.blob())
+      .catch((err) => {
+        console.error("Error fetching image:", err);
+        setError("Failed to fetch image.");
+      });
+  
+    if (imageBlob) {
+      formData.append("file", imageBlob, "user-image.png");
+  
+      try {
+        const response = await fetch("http://127.0.0.1:5000/analyze_face", {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (response.ok) {
+          console.log("Image uploaded successfully!");
+        } else {
+          const errorText = await response.text();
+          console.error("Failed to upload image:", errorText);
+          setError(`Failed to upload image: ${errorText}`);
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        setError("Error uploading image.");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+  
+  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="relative mb-4">
         <Webcam
           ref={webcamRef}
-          audio={true}
+          audio={false}
           screenshotFormat="image/png"
           videoConstraints={videoConstraints}
           onUserMedia={onUserMedia}
@@ -93,6 +138,16 @@ const Camera = () => {
           <img src={url} alt="Screenshot" className="rounded-lg shadow-lg" />
         </div>
       )}
+
+      {loading && <p className="text-blue-500 mt-4">Uploading...</p>}
+      {error && <p className="text-red-500 mt-4">{error}</p>}
+
+      <button
+        className="m-2 mt-6 px-6 py-3 bg-[#025A4E] text-white rounded-md hover:bg-[#018d75] focus:outline-none transition duration-300 ease-in-out"
+        onClick={uploadImage}
+      >
+        Upload Image
+      </button>
     </div>
   );
 };
