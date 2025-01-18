@@ -149,7 +149,7 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#fffdf5] to-[#faf1d0] p-4">
       <div className="bg-white shadow-xl rounded-lg w-full max-w-lg p-6 space-y-4">
         <div className="text-lg font-bold text-gray-800">
           {questions[currentQuestion].text}
@@ -159,7 +159,7 @@ const Chatbot = () => {
             questions[currentQuestion].options.map((option) => (
               <button
                 key={option}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300"
+                className="w-full bg-[#1f382a] hover:bg-[#315842] text-white py-2 px-4 rounded-md transition duration-300"
                 onClick={() =>
                   handleResponse(questions[currentQuestion].key, option)
                 }
@@ -171,7 +171,7 @@ const Chatbot = () => {
             <input
               type="text"
               placeholder="Type your answer here..."
-              className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#1f382a]"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleResponse(

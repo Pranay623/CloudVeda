@@ -46,7 +46,7 @@ const Camera = () => {
       try {
         // Send image to the ML API
         const response = await axios.post(
-          `http://172.31.77.145:5000/analyze_${category}`,
+          `http://3.237.21.65:5000/analyze_${category}`,
           formData
         );
 
