@@ -1,40 +1,23 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+
 import Logo from "../../assets/cldveda 4.png";
+
 import img from "../../assets/img1.png";
 import {MdOutlineRestaurantMenu} from 'react-icons/md';
 import {GiHamburgerMenu} from 'react-icons/gi';
+import Navbar from './Navbar';
 
 const Landing = () => {
   const navigate=useNavigate();
 
 
   return (
-    <div className="min-h-screen bg-[#F9F8F6] flex items-center justify-center">
+    <div className="min-h-screen bg-[#FFFDF5] flex items-center justify-center">
       <div className="max-w-full mx-auto px-6 md:px-12 lg:px-24">
-        <header className="flex justify-between items-center py-">
-          <div className="flex items-center space-x-3">
-            <img src={Logo} alt="Cloudveda Logo" className="min-w-26 min-h-20" />
-            <h1 className="text-2xl font-bold text-[#2D493B]"></h1>
-          </div>
-          <nav className="space-x-20 hidden md:flex">
-            <a href="#" className="text-[#2D493B] hover:text-[#1F382A]">
-              Home
-            </a>
-            <a href="#" className="text-[#2D493B] hover:text-[#1F382A]">
-              About
-            </a>
-            <a href="#" className="text-[#2D493B] hover:text-[#1F382A]">
-              Experts
-            </a>
-          </nav>
-          <div
-          onClick={()=>{navigate('/login')}}
-            className="py-2 px-4 bg-[#2D493B] text-white rounded-lg hover:bg-[#1F382A]"
-          >
-            Login/Register
-          </div>
-        </header>
+
+        <Navbar/>
+
 
         <main className="mt-12 flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 space-y-6">
