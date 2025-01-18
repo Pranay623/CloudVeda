@@ -4,9 +4,9 @@ import Card from "./Card";
 import Footer from '../Footer/Footer';
 
 const Dashboard = () => {
-  const [currentCard, setCurrentCard] = useState(0); // Track which card is visible
-  const [experts, setExperts] = useState([]); // Store the data from the API
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [currentCard, setCurrentCard] = useState(0); 
+  const [experts, setExperts] = useState([]); 
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const fetchExperts = async () => {
@@ -29,7 +29,7 @@ const Dashboard = () => {
   }, []);
 
   const handleNextCard = () => {
-    setCurrentCard((prevCard) => (prevCard + 1) % experts.length); // Toggle through cards
+    setCurrentCard((prevCard) => (prevCard + 1) % experts.length); 
   };
 
   return (
@@ -57,16 +57,16 @@ const Dashboard = () => {
             </p>
           </div>
 
-          {/* Cards Section */}
+          
           <div className="flex items-center space-x-4 mt-2 mr-14">
             {isLoading ? (
               <p>Loading...</p>
             ) : experts.length > 0 ? (
               <>
-                {/* Render the current card */}
+                
                 <Card expert={experts[currentCard]} />
 
-                {/* Arrow Button */}
+                
                 <button
                   className="bg-green-800 text-white p-4 rounded-full hover:bg-green-700"
                   onClick={handleNextCard}

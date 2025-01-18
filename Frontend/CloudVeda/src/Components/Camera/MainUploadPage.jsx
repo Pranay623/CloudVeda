@@ -43,10 +43,12 @@ const MainUploadPage = () => {
           </div>
         </div>
       </div>
+
     </div>
     <Footer/>
     </>
   );
 };
+
 
 export default MainUploadPage;

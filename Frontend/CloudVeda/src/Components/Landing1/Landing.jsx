@@ -11,9 +11,9 @@ const Landing = () => {
   const handleGetStarted = () => {
     const token = localStorage.getItem("authToken");
     if (token) {
-      navigate("/dashboard"); // Navigate to dashboard if logged in
+      navigate("/dashboard"); 
     } else {
-      navigate("/login"); // Navigate to login if not logged in
+      navigate("/login"); 
     }
   };
 

@@ -12,6 +12,7 @@ const Card = ({ expert }) => {
     navigate("/chat");
   };
 
+
   return (
     <div className="bg-cream p-6 rounded-lg shadow-md w-72 h-96">
       {/* Placeholder for the profile image */}
