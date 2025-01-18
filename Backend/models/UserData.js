@@ -6,6 +6,11 @@ const UserDataSchema = new mongoose.Schema({
     ref: "User",
     // required: true,
   },
+  expert_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   age: {
     type: Number,
     // required: true,
@@ -88,12 +93,12 @@ const UserDataSchema = new mongoose.Schema({
   additional_details: { type: Object },
   created_at: { type: Date, default: Date.now },
   status: { type: String, default: "Pending" },
-  images: { 
-    type: [String] 
+  images: {
+    type: [String],
   },
-  video: { 
-    type: String
- },
+  video: {
+    type: String,
+  },
 });
 
 const UserData = mongoose.model("UserData", UserDataSchema);

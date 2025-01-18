@@ -27,6 +27,7 @@ const Navbar = () => {
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300 " onClick={()=> navigate('/')}>Home</a>
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300" onClick={()=> navigate('/about')}>About</a>
         <a href="#" className="text-[#2D493B] border-transparent border-2 rounded-md hover:border-[#2D493B] transition-all duration-300">Experts</a>
+
       </nav>
       <div
         onClick={handleNavigation}
