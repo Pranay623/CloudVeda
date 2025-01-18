@@ -14,8 +14,8 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-cream min-h-screen py-8 px-4 md:px-16 mt-20">
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+      <div className="bg-cream min-h-screen bg-[#FFFDF5] py-8 px-4 md:px-16 ">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mt-20">
           
           <div className="md:w-1/2">
             <h1 className="text-4xl font-bold text-green-900 mb-4">Guidelines</h1>
