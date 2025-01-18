@@ -25,9 +25,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/uploadphotos" element={<MainUploadPage/>} />
-        <Route path="/camera/face" element={<Camera />} />
-        <Route path="/camera/nails" element={<Camera />} />
-        <Route path="/camera/head" element={<Camera />} />
+       
+        <Route path="/camera/" element={<Camera />} />
 
         <Route path="/about" element={<About/>}/>
 
