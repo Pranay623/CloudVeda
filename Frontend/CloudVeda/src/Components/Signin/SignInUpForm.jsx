@@ -115,12 +115,15 @@ function SignInUpForm() {
             />
             <Component.Input
               className="w-full p-2 mb-4 border border-gray-300 rounded"
-              type="choice"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
+              as="select"  // To render as a dropdown
+              name="role"
+              value={formData.role}
               onChange={handleChange}
-            />
+            >
+              <option value="" disabled>Select Role</option>  {/* Optional placeholder */}
+              <option value="patient">Patient</option>
+              <option value="expert">Expert</option>
+            </Component.Input>
             <Component.Button
               className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]"
               type="submit"
