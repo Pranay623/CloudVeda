@@ -5,7 +5,12 @@ import Landing from "./Components/Landing1/Landing.jsx";
 import SignInUpForm from "./Components/Signin/SignInUpForm.jsx";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import Camera from "./Components/Camera/Everything.jsx";
+
+import Everything from "./Components/Camera/Everything.jsx";
+import MainUploadPage from "./Components/Camera/MainUploadPage.jsx";
 import About from "./Components/About/About.jsx"
+import Profile from "./Components/Profile/Profile.jsx";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,7 +23,17 @@ function App() {
         <Route path="/login" element={<SignInUpForm />} />
         {/* <Route path="/" element={<Camera />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/uploadphotos" element={<MainUploadPage/>} />
+        <Route path="/camera/face" element={<Camera />} />
+        <Route path="/camera/nails" element={<Camera />} />
+        <Route path="/camera/head" element={<Camera />} />
         <Route path="/about" element={<About/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        
+        
+
+
       </Routes>
     </Router>
   );

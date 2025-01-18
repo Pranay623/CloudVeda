@@ -17,8 +17,8 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFDF5] flex items-center justify-center">
-      <div className="max-w-full mx-auto px-6 md:px-12 lg:px-24">
+    <div className=" bg-[#FFFDF5] flex items-center justify-center">
+      <div className="px-6 md:px-12 lg:px-24">
         <Navbar />
 
         <main className="mt-12 flex flex-col lg:flex-row items-center justify-between">

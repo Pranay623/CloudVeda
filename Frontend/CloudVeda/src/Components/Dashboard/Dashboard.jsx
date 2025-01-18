@@ -33,6 +33,7 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
+
       <div className="bg-[#FFFDF5] min-h-screen py-8 px-4 md:px-16 mt-0">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mt-8">
           
