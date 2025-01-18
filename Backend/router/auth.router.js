@@ -15,4 +15,7 @@ router.post(
     upload,  // Use the previously configured upload middleware here
     userDataController.saveUserData  // Save the user data after file upload
   );
+
+// router.get('/userdata', userDataController.getUserData);
+
 export default router;
