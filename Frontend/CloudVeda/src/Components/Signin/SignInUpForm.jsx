@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import * as Component from "../sign/component";
-import photo from "../sign/assests/Paper plane.gif";
+import * as Component from "./component";
+import photo from "../Signin/assests/Paper plane.gif";
+import { useNavigate } from "react-router-dom";
 
 function SignInUpForm() {
+  const navigate = useNavigate();
   const [signin, toggle] = useState(true); // Toggle between sign-in and sign-up
   const [formData, setFormData] = useState({
     name: "",
@@ -22,6 +24,8 @@ function SignInUpForm() {
     e.preventDefault();
     setError("");
     setMessage("");
+    console.log(formData); 
+
 
     // Basic validation
     if (!formData.email || !formData.password || (!signin && !formData.name)) {
@@ -31,7 +35,7 @@ function SignInUpForm() {
 
     try {
       const endpoint = signin
-        ? "http://localhost:3000/api/login" 
+        ? "http://localhost:3000/api/login"
         : "http://localhost:3000/api/signup";
 
       const response = await fetch(endpoint, {
@@ -51,8 +55,18 @@ function SignInUpForm() {
       const token = data.token;
       const id = data._id;
       setMessage(`Success! Token: ${token}`);
-      localStorage.setItem("authToken", token);  
-      localStorage.setItem("userid",id);
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("userid", id);
+
+      // If it's a sign-up, switch back to sign-in
+      if (!signin) {
+        toggle(true);
+      }
+
+      // After successful sign-in, navigate to the dashboard
+      if (signin) {
+        navigate("/dashboard"); // Navigate to the dashboard route
+      }
     } catch (err) {
       setError(err.message || "Failed to process the request.");
     }
@@ -67,30 +81,82 @@ function SignInUpForm() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         {message && <p className="text-green-500 text-center">{message}</p>}
 
+        {/* Sign Up Form */}
         <Component.SignUpContainer signinIn={signin}>
-
-          <Component.Form className="p-8">
-            <Component.Title className="text-2xl font-bold mb-4">Create Account</Component.Title>
-            <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="text" placeholder="Name" />
-            <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="email" placeholder="Email" />
-            <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="password" placeholder="Password" />
-            <Component.Button className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]" type="submit">Sign Up</Component.Button>
-
+          <Component.Form className="p-8" onSubmit={handleSubmit}>
+            <Component.Title className="text-2xl font-bold mb-4">
+              {signin ? "Sign In" : "Create Account"}
+            </Component.Title>
+            {!signin && (
+              <Component.Input
+                className="w-full p-2 mb-4 border border-gray-300 rounded"
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            )}
+            <Component.Input
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <Component.Input
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <Component.Button
+              className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]"
+              type="submit"
+            >
+              {signin ? "Sign In" : "Sign Up"}
+            </Component.Button>
           </Component.Form>
         </Component.SignUpContainer>
 
+        {/* Sign In Form */}
         <Component.SignInContainer signinIn={signin}>
-
           <Component.Form className="p-8">
-            <Component.Title className="text-3xl font-bold mb-4">Sign in</Component.Title>
-            <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="email" placeholder="Email" />
-            <Component.Input className="w-full p-2 mb-4 border border-gray-300 rounded" type="password" placeholder="Password" />
-            <Component.Button className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]" type="submit">Sign In</Component.Button>
-            <Component.chotabutton className="text-[#2D493B] mt-2 hover:underline">Forget Password</Component.chotabutton>
-
+            <Component.Title className="text-3xl font-bold mb-4">
+              {signin ? "Sign in" : "Create Account"}
+            </Component.Title>
+            <Component.Input
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <Component.Input
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <Component.Button
+              className="w-full py-2 bg-[#2D493B] text-white rounded hover:bg-[#274034]"
+              type="submit"
+            >
+              {signin ? "Sign In" : "Sign Up"}
+            </Component.Button>
+            <Component.chotabutton className="text-[#2D493B] mt-2 hover:underline">
+              Forget Password
+            </Component.chotabutton>
           </Component.Form>
         </Component.SignInContainer>
 
+        {/* Overlay Panels for Sign-In/Sign-Up Toggle */}
         <Component.OverlayContainer signinIn={signin}>
           <Component.Overlay signinIn={signin}>
             <Component.LeftOverlayPanel signinIn={signin}>
@@ -116,8 +182,10 @@ function SignInUpForm() {
                 Enter your personal details and start your journey with us
               </Component.Paragraph>
 
-              <Component.GhostButton className="px-4 py-2 text-blue-600 bg-white border border-[#2D493B] rounded hover:bg-blue-100" onClick={() => toggle(false)}>
-
+              <Component.GhostButton
+                className="px-4 py-2 text-blue-600 bg-white border border-[#2D493B] rounded hover:bg-blue-100"
+                onClick={() => toggle(false)}
+              >
                 Sign Up
               </Component.GhostButton>
             </Component.RightOverlayPanel>
