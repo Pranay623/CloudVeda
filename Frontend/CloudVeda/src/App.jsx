@@ -12,8 +12,9 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" id="main" element={<Landing />} />
         <Route path="/login" element={<SignInUpForm />} />
-        <Route path="/" element={<Camera />} />
+        {/* <Route path="/" element={<Camera />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
