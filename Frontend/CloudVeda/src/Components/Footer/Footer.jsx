@@ -19,10 +19,32 @@ const Navigate=useNavigate();
         <div>
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
-            <li onClick={Navigate('/about')} className="text-gray-400 hover:text-white cursor-pointer">About Us</li>
-            <li onClick={Navigate('/about')} className="text-gray-400 hover:text-white cursor-pointer">Services</li>
-            <li onClick={Navigate('/about')} className="text-gray-400 hover:text-white cursor-pointer">Contact</li>
-          </ul>
+  <li>
+    <a
+      href={'/about'}
+      className="text-gray-400 hover:text-white cursor-pointer"
+    >
+      About Us
+    </a>
+  </li>
+  <li>
+    <a
+      href={'/about'}
+      className="text-gray-400 hover:text-white cursor-pointer"
+    >
+      Services
+    </a>
+  </li>
+  <li>
+    <a
+      href={'/about'}
+      className="text-gray-400 hover:text-white cursor-pointer"
+    >
+      Contact
+    </a>
+  </li>
+</ul>
+
         </div>
 
         {/* Contact & Social Media */}
