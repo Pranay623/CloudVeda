@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [currentCard, setCurrentCard] = useState(0);
   const [experts, setExperts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false); // For controlling animation classes
+  const [isAnimating, setIsAnimating] = useState(false); 
 
   useEffect(() => {
     const fetchExperts = async () => {
@@ -29,20 +29,20 @@ const Dashboard = () => {
   }, []);
 
   const handleNextCard = () => {
-    setIsAnimating(true); // Trigger animation
+    setIsAnimating(true); 
     setTimeout(() => {
       setCurrentCard((prevCard) => (prevCard + 1) % experts.length);
-      setIsAnimating(false); // Reset animation state
-    }, 500); // Match the duration of the animation
+      setIsAnimating(false); 
+    }, 500); 
   };
-
+  
   return (
     <>
       <Navbar />
       <div className="bg-[#FFFDF5] min-h-screen py-8 px-4 md:px-16 mt-0">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mt-8">
           <div className="md:w-1/2">
-            <h1 className="text-4xl font-bold text-green-900 mb-4">Guidelines</h1>
+          <h1 className="text-4xl font-bold text-green-900 mb-4">Guidelines</h1>
             <p className="text-gray-700 text-sm md:text-base leading-relaxed">
               Welcome to CloudVeda!<br />
               Our platform combines advanced technology and Ayurveda to provide<br />
@@ -64,7 +64,11 @@ const Dashboard = () => {
               <p>Loading...</p>
             ) : experts.length > 0 ? (
               <>
-                <div className={isAnimating ? "card-exit" : "card-enter"}>
+                <div
+                  className={`transition-all duration-500 ${
+                    isAnimating ? 'animate-slideOut' : 'animate-slideIn'
+                  }`}
+                >
                   <Card expert={experts[currentCard]} />
                 </div>
                 <button
@@ -96,6 +100,6 @@ const Dashboard = () => {
       <Footer />
     </>
   );
-};
+}  
 
 export default Dashboard;

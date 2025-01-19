@@ -7,7 +7,6 @@ const Navigate=useNavigate();
   return (
     <footer className="bg-[#2D493B] text-white py-10">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Company Info */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Cloudveda</h3>
           <p className="text-gray-400">
@@ -15,7 +14,6 @@ const Navigate=useNavigate();
           </p>
         </div>
 
-        {/* Links */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2">
@@ -51,7 +49,6 @@ const Navigate=useNavigate();
 
         </div>
 
-        {/* Contact & Social Media */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
           <p className="text-gray-400">Email: support@example.com</p>

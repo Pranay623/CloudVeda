@@ -8,12 +8,10 @@ async function deductPoints(userId) {
             throw new Error('User not found');
         }
 
-        // Check if the user has enough points
         if (user.points < 10) {
             throw new Error('Insufficient points. Please purchase a package.');
         }
 
-        // Deduct points
         user.points -= 10;
         await user.save();
 

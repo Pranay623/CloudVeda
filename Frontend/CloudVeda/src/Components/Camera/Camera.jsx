@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
 
-// Define video constraints for webcam
 const videoConstraints = {
   width: 780,
   facingMode: "user",
@@ -16,6 +15,7 @@ const Camera = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  
   const handleSendEmail = async () => {
     try {
       // Get email and full name from localStorage
@@ -66,19 +66,18 @@ const Camera = () => {
     }
   };
 
-  // Function to capture photo for a specific category
   const capturePhoto = useCallback(async (category) => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
-      const fileName = `${category}-${Date.now()}.png`; // Generate unique file name
+      const fileName = `${category}-${Date.now()}.png`; 
   
-      // Save captured photo locally in state
+    
+
       setPhotos((prevPhotos) => ({
         ...prevPhotos,
         [category]: { src: imageSrc, name: fileName },
       }));
-  
-      // Convert DataURI to Blob
+
       const dataURItoBlob = (dataURI) => {
         const byteString = atob(dataURI.split(",")[1]);
         const ab = new ArrayBuffer(byteString.length);
@@ -93,6 +92,7 @@ const Camera = () => {
       formData.append("image", dataURItoBlob(imageSrc), fileName);
   
       try {
+
         // Send image to the ML API
         const response = await fetch(
           `http://127.0.0.1:5000/analyze_${category}`,
@@ -120,10 +120,12 @@ const Camera = () => {
           wrinkles: mlData.wrinkles || "Not Available",
         };
   
+
         setPhotoAnalysis((prevAnalysis) => ({
           ...prevAnalysis,
-          [category]: mlData, // Save ML analysis result in state
+          [category]: mlData, 
         }));
+
   
         // Prepare data for backend API in the format
         const backendData = {
@@ -149,6 +151,7 @@ const Camera = () => {
           throw new Error("Failed to save analysis to backend.");
         }
   
+
         console.log(`Successfully saved ${category} analysis to backend.`);
       } catch (err) {
         setError("Error analyzing image or saving data to backend.");
@@ -158,7 +161,6 @@ const Camera = () => {
   }, []);
   
 
-  // Function to handle submission
   const uploadImages = async () => {
     if (!photos.face || !photos.head || !photos.nails) {
       alert("Please capture all three photos.");
@@ -190,7 +192,8 @@ if (!user_id || !expert_id) {
       formData.append("nails_analysis", JSON.stringify(photoAnalysis.nails));
 
 
-      // Send photos and analysis results to backend API
+
+ 
       const response = await fetch("http://localhost:3000/image/ml", {
         method: "POST",
         body: formData,
@@ -199,6 +202,7 @@ if (!user_id || !expert_id) {
       if (!response.ok) {
         throw new Error("Failed to upload images.");
       }
+
 
       alert("Photos and analysis saved successfully!");
       navigate("/thankyou");

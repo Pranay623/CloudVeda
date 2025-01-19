@@ -2,7 +2,6 @@ import { sendEmail } from '../modules/service.js';
 
 const sendNewYearWishes = async (req, res) => {
   try {
-    // Extract the list of emails and full names from the request body
     const { recipients } = req.body;
 
     if (!recipients || recipients.length === 0) {
@@ -15,7 +14,6 @@ const sendNewYearWishes = async (req, res) => {
     let successCount = 0;
     let failureCount = 0;
 
-    // Loop through the recipients and send the email to each one
     for (const recipient of recipients) {
       const { email, fullName } = recipient;
 
@@ -29,7 +27,9 @@ const sendNewYearWishes = async (req, res) => {
         await sendEmail({
           from: process.env.SMTP_EMAIL, // Sender email (from environment)
           to: email, // Recipient email
+
           subject: `Thank You! Dear ${fullName} from CloudVeda`,
+
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f7fc; border-radius: 8px;">
   <div style="text-align: left; margin-bottom: 30px;">
@@ -71,7 +71,7 @@ const sendNewYearWishes = async (req, res) => {
       }
     }
 
-    // Return the status of the email sending process
+   
     res.status(200).json({
       success: true,
       message: 'Completed sending New Year wishes',

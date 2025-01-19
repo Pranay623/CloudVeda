@@ -81,4 +81,4 @@ const getGeminiResponse = async (req, res) => {
   }
 };
 
-export default { getGeminiResponse }; // Export as an object
+export default { getGeminiResponse }; 

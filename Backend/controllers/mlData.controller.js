@@ -35,7 +35,6 @@ export const saveImageData = async (req, res) => {
       health_index,
     });
 
-    // Save to MongoDB
     const savedImageData = await imageData.save();
 
     res.status(201).json({
