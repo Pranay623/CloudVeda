@@ -54,9 +54,14 @@ function SignInUpForm() {
 
       const token = data.token;
       const id = data.user_id;
+      const fullName = data.fullName;
+      const email = data.email;
+
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
+      localStorage.setItem("email",email);
+      localStorage.setItem("fullName",fullName);
 
       // If it's a sign-up, switch back to sign-in
       if (!signin) {
