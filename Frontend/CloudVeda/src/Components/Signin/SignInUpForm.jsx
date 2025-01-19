@@ -51,16 +51,25 @@ function SignInUpForm() {
 
       const token = data.token;
       const id = data.user_id;
+      const role=data.role;
+      const name=data.name;
+      console.log(data.name);
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
+      localStorage.setItem("userName", name); 
 
       if (!signin) {
         toggle(true);
       }
 
       if (signin) {
-        navigate("/dashboard");
+        if(role=="expert"){
+          navigate("/expert")
+        }
+        else{
+          navigate("/dashboard");
+        }
       }
     } catch (err) {
       setError(err.message || "Failed to process the request.");
