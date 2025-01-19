@@ -10,6 +10,7 @@ async function login(req, res) {
         res.status(200).json({
             token: token,
             user_id: user._id,
+            role: user.roles,
             message: "Login successful",
           });
           

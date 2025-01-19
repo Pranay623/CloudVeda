@@ -65,7 +65,8 @@ const hairAnalysisSchema = new mongoose.Schema({
     hair_analysis: { type: hairAnalysisSchema, default: () => ({}) },
     hairline_analysis: { type: hairlineAnalysisSchema, default: () => ({}) },
     skin_analysis: { type: skinAnalysisSchema, default: () => ({}) },
-    nail_analysis: { type: nailAnalysisSchema, default: () => ({}) }
+    nail_analysis: { type: nailAnalysisSchema, default: () => ({}) },
+    expert_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   });
   
   // Create the model from the schema
