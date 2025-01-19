@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [currentCard, setCurrentCard] = useState(0);
   const [experts, setExperts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false); // For controlling animation classes
+  const [isAnimating, setIsAnimating] = useState(false); 
 
   useEffect(() => {
     const fetchExperts = async () => {
@@ -29,11 +29,11 @@ const Dashboard = () => {
   }, []);
 
   const handleNextCard = () => {
-    setIsAnimating(true); // Trigger animation
+    setIsAnimating(true); 
     setTimeout(() => {
       setCurrentCard((prevCard) => (prevCard + 1) % experts.length);
-      setIsAnimating(false); // Reset animation state
-    }, 500); // Match the duration of the animation
+      setIsAnimating(false); 
+    }, 500);
   };
 
   return (

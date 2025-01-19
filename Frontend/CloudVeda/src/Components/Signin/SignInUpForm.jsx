@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignInUpForm() {
   const navigate = useNavigate();
-  const [signin, toggle] = useState(true); // Toggle between sign-in and sign-up
+  const [signin, toggle] = useState(true); 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,12 +14,10 @@ function SignInUpForm() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -27,7 +25,6 @@ function SignInUpForm() {
     console.log(formData); 
 
 
-    // Basic validation
     if (!formData.email || !formData.password || (!signin && !formData.name)) {
       setError("Please fill in all fields.");
       return;
@@ -58,14 +55,12 @@ function SignInUpForm() {
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
 
-      // If it's a sign-up, switch back to sign-in
       if (!signin) {
         toggle(true);
       }
 
-      // After successful sign-in, navigate to the dashboard
       if (signin) {
-        navigate("/dashboard"); // Navigate to the dashboard route
+        navigate("/dashboard");
       }
     } catch (err) {
       setError(err.message || "Failed to process the request.");
@@ -81,7 +76,6 @@ function SignInUpForm() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         {message && <p className="text-green-500 text-center">{message}</p>}
 
-        {/* Sign Up Form */}
         <Component.SignUpContainer signinIn={signin}>
           <Component.Form className="p-8" onSubmit={handleSubmit}>
             <Component.Title className="text-2xl font-bold mb-4">
@@ -115,12 +109,12 @@ function SignInUpForm() {
             />
             <Component.Input
               className="w-full p-2 mb-4 border border-gray-300 rounded"
-              as="select"  // To render as a dropdown
+              as="select"  
               name="role"
               value={formData.role}
               onChange={handleChange}
             >
-              <option value="" disabled>Select Role</option>  {/* Optional placeholder */}
+              <option value="" disabled>Select Role</option>
               <option value="patient">Patient</option>
               <option value="expert">Expert</option>
             </Component.Input>
@@ -133,7 +127,6 @@ function SignInUpForm() {
           </Component.Form>
         </Component.SignUpContainer>
 
-        {/* Sign In Form */}
         <Component.SignInContainer signinIn={signin}>
           <Component.Form className="p-8" onSubmit={handleSubmit}>
             <Component.Title className="text-3xl font-bold mb-4">
@@ -168,7 +161,6 @@ function SignInUpForm() {
           </Component.Form>
         </Component.SignInContainer>
 
-        {/* Overlay Panels for Sign-In/Sign-Up Toggle */}
         <Component.OverlayContainer signinIn={signin}>
           <Component.Overlay signinIn={signin}>
             <Component.LeftOverlayPanel signinIn={signin}>

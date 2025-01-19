@@ -47,13 +47,11 @@ const geminiEndpoint = 'https://api.gemini.example.com/v1/generate';
 
 const getGeminiResponse = async (req, res) => {
   try {
-    // Ensure the user ID exists
     const userId = req.user?.id;
     if (!userId) {
       return res.status(400).json({ error: 'User ID not found. Please ensure you are authenticated.' });
     }
 
-    // Fetch or create ImageData
     let imageData = await ImageData.findOne({ user_id: userId });
     if (!imageData) {
       return res.status(404).json({ error: 'Image data not found for the user.' });
@@ -71,7 +69,6 @@ const getGeminiResponse = async (req, res) => {
       healthStatus: imageData.health_index,
     };
 
-    // Call the Gemini API
     const response = await axios.post(geminiEndpoint, {
       headers: {
         'Authorization': `Bearer ${geminiApiKey}`,
