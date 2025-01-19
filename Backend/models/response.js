@@ -13,8 +13,9 @@ const hairAnalysisSchema = new mongoose.Schema({
   const skinAnalysisSchema = new mongoose.Schema({
     dark_circles: { 
       type: String, 
-      default: 'Present', 
-      enum: ['Present', 'Not Present', 'Not Available'] 
+      default: 'Not Available', 
+      enum: ['Present', 'Absent', 'Not Available']
+
     },
     expression: { 
       type: String, 
@@ -23,13 +24,14 @@ const hairAnalysisSchema = new mongoose.Schema({
     },
     face_shape: { 
       type: String, 
-      default: 'val', 
+
+      default: 'Not Available', 
+
       enum: ['Oval', 'Square', 'Round', 'Heart', 'Not Available']
     },
     health_index: { 
       type: String, 
-      default: 'Not Available', 
-      
+      default: 'Not Available'
     },
     skin_texture: { 
       type: String, 
@@ -43,13 +45,13 @@ const hairAnalysisSchema = new mongoose.Schema({
     },
     spots: { 
       type: String, 
-      default: '0 spots detected', 
-      
+      default: '0 spots detected'
     },
     wrinkles: { 
       type: String, 
       default: 'Not Available', 
-      enum: ['Few', 'Moderate', 'Severe', 'Not Available'] 
+
+      enum: ['Few', 'Moderate', 'Severe', 'Not Available']
     }
   });
   
@@ -58,6 +60,8 @@ const hairAnalysisSchema = new mongoose.Schema({
   });
   
   const healthAnalysisSchema = new mongoose.Schema({
+    user_id: { type: String, required: true }, // Add user_id field here
+    expert_id: { type: String, required: true }, // Add user_id field here
     hair_analysis: { type: hairAnalysisSchema, default: () => ({}) },
     hairline_analysis: { type: hairlineAnalysisSchema, default: () => ({}) },
     skin_analysis: { type: skinAnalysisSchema, default: () => ({}) },

@@ -27,7 +27,9 @@ const sendNewYearWishes = async (req, res) => {
         await sendEmail({
           from: process.env.SMTP_EMAIL, // Sender email (from environment)
           to: email, // Recipient email
-          subject: `${fullName} here is your report details`,
+
+          subject: `Thank You! Dear ${fullName} from CloudVeda`,
+
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f7fc; border-radius: 8px;">
   <div style="text-align: left; margin-bottom: 30px;">

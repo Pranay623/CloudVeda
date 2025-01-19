@@ -52,34 +52,22 @@ export const mlresponse = async (req, res) => {
   try {
     // Extract data from the request body
     const {
+      user_id,
+      expert_id,
       hair_analysis,
       hairline_analysis,
-      dark_circles,
-      expression,
-      face_shape,
-      health_index,
-      skin_texture,
-      skin_tone,
-      spots,
-      wrinkles,
+      skin_analysis, // This should be an object now
       nail_analysis
     } = req.body;
 
     // Create a new document based on the extracted data
     const newHealthAnalysis = new HealthAnalysis({
+      user_id, // Pass the user ID from req.body
+      expert_id,
       hair_analysis,
       hairline_analysis,
-      skin_analysis: {
-        dark_circles,
-        expression,
-        face_shape,
-        health_index,
-        skin_texture,
-        skin_tone,
-        spots,
-        wrinkles
-      },
-      nail_analysis
+      skin_analysis, // Directly pass the whole object
+      nail_analysis,
     });
 
     // Save the new document to the database
@@ -95,8 +83,6 @@ export const mlresponse = async (req, res) => {
     res.status(500).json({ message: 'Error saving data', error: error.message });
   }
 };
-
-
 
 export const getHealthAnalysis = async (req, res) => {
   try {

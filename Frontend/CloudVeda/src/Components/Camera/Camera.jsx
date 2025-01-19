@@ -1,7 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const videoConstraints = {
   width: 780,
@@ -16,10 +15,63 @@ const Camera = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  
+  const handleSendEmail = async () => {
+    try {
+      // Get email and full name from localStorage
+      const email = localStorage.getItem("email");
+      const fullName = localStorage.getItem("fullName");
+  
+      if (!email || !fullName) {
+        alert("Email or full name is missing in localStorage.");
+        return;
+      }
+  
+      // Construct the recipients array
+      const recipients = [
+        {
+          email: email,
+          fullName: fullName,
+        },
+      ];
+  
+      // Construct the payload
+      const payload = {
+        recipients: recipients,
+      };
+  
+      // Send the POST request to the email API
+      const response = await fetch("http://localhost:3000/api/email/send-wishes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to send email.");
+      }
+  
+      const data = await response.json();
+      console.log("Email sent successfully:", data);
+  
+      // Optionally, show a success message
+      alert("Email sent successfully!");
+      navigate("/thankyou")
+  
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Error sending email.");
+    }
+  };
+
   const capturePhoto = useCallback(async (category) => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       const fileName = `${category}-${Date.now()}.png`; 
+  
+    
 
       setPhotos((prevPhotos) => ({
         ...prevPhotos,
@@ -35,29 +87,70 @@ const Camera = () => {
         }
         return new Blob([ab], { type: "image/png" });
       };
-
+  
       const formData = new FormData();
       formData.append("image", dataURItoBlob(imageSrc), fileName);
-
+  
       try {
-        const response = await axios.post(
-          `http://3.237.21.65:5000/analyze_${category}`,
-          formData
-        );
 
-        const mlData = response.data;
+        // Send image to the ML API
+        const response = await fetch(
+          `http://127.0.0.1:5000/analyze_${category}`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+  
+        if (!response.ok) {
+          throw new Error("Failed to analyze image.");
+        }
+  
+        const mlData = await response.json(); // Response from ML API
+  
+        // Prepare the ML data in the required format
+        const analysisData = {
+          dark_circles: mlData.dark_circles || "Not Available",
+          expression: mlData.expression || "Not Available",
+          face_shape: mlData.face_shape || "Not Available",
+          health_index: mlData.health_index || "Not Available",
+          skin_texture: mlData.skin_texture || "Not Available",
+          skin_tone: mlData.skin_tone || "Not Available",
+          spots: mlData.spots || "0 spots detected",
+          wrinkles: mlData.wrinkles || "Not Available",
+        };
+  
+
         setPhotoAnalysis((prevAnalysis) => ({
           ...prevAnalysis,
           [category]: mlData, 
         }));
 
+  
+        // Prepare data for backend API in the format
         const backendData = {
           category,
           user_id: localStorage.getItem("userid"),
-          analysis: mlData,
+          expert_id: localStorage.getItem("activeExpertId"),
+          hair_analysis: mlData.hair_analysis || {},
+          hairline_analysis: mlData.hairline_analysis || {},
+          skin_analysis: analysisData, // Save ML analysis in the correct format
+          nail_analysis: mlData.nail_analysis || {},
         };
-
-        await axios.post("http://localhost:3000/image/ml", backendData);
+  
+        // Send ML response to backend
+        const backendResponse = await fetch("http://localhost:3000/image/ml", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(backendData),
+        });
+  
+        if (!backendResponse.ok) {
+          throw new Error("Failed to save analysis to backend.");
+        }
+  
 
         console.log(`Successfully saved ${category} analysis to backend.`);
       } catch (err) {
@@ -66,6 +159,7 @@ const Camera = () => {
       }
     }
   }, []);
+  
 
   const uploadImages = async () => {
     if (!photos.face || !photos.head || !photos.nails) {
@@ -77,7 +171,19 @@ const Camera = () => {
     setError(null);
 
     try {
+      const user_id = localStorage.getItem("userid");
+      const expert_id = localStorage.getItem("activeExpertId");
+      
+      console.log(expert_id)
+
+if (!user_id || !expert_id) {
+  console.error("User ID or Expert ID is missing in localStorage.");
+  alert("User ID or Expert ID is not available. Please try logging in again.");
+  return;
+}
       const formData = new FormData();
+      formData.append("user_id", user_id);
+      formData.append("expert_id", expert_id);
       formData.append("face", photos.face.src);
       formData.append("head", photos.head.src);
       formData.append("nails", photos.nails.src);
@@ -85,10 +191,18 @@ const Camera = () => {
       formData.append("head_analysis", JSON.stringify(photoAnalysis.head));
       formData.append("nails_analysis", JSON.stringify(photoAnalysis.nails));
 
-      const user_id = localStorage.getItem("userid");
-      formData.append("user_id", user_id);
 
-      await axios.post("http://localhost:3000/image/ml", formData);
+
+ 
+      const response = await fetch("http://localhost:3000/image/ml", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload images.");
+      }
+
 
       alert("Photos and analysis saved successfully!");
       navigate("/thankyou");
@@ -152,14 +266,14 @@ const Camera = () => {
       ))}
 
       {loading && <p className="text-blue-500 mt-4">Uploading...</p>}
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+      {/* {error && <p className="text-red-500 mt-4">{error}</p>} */}
 
       <button
-        className="m-2 mt-6 px-6 py-3 bg-[#025A4E] text-white rounded-md hover:bg-[#018d75] focus:outline-none transition duration-300 ease-in-out"
-        onClick={uploadImages}
-      >
-        Submit Photos
-      </button>
+    className="m-2 mt-6 px-6 py-3 bg-[#025A4E] text-white rounded-md hover:bg-[#018d75] focus:outline-none transition duration-300 ease-in-out"
+    onClick={handleSendEmail} // Attach the function to the button
+  >
+    Submit Photos
+  </button>
     </div>
   );
 };
