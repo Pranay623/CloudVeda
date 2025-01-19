@@ -6,10 +6,9 @@ const Card = ({ expert }) => {
   const navigate = useNavigate();
 
   const handleAskClick = () => {
-    // Store the expert ID in local storage
+
     localStorage.setItem("activeExpertId", expert._id);
 
-    // Navigate to the /chat route
     navigate("/chat");
   };
 

@@ -63,14 +63,13 @@ function SignInUpForm() {
       localStorage.setItem("email",email);
       localStorage.setItem("fullName",fullName);
 
-      // If it's a sign-up, switch back to sign-in
+  
       if (!signin) {
         toggle(true);
       }
 
-      // After successful sign-in, navigate to the dashboard
       if (signin) {
-        navigate("/dashboard"); // Navigate to the dashboard route
+        navigate("/dashboard"); 
       }
     } catch (err) {
       setError(err.message || "Failed to process the request.");
@@ -125,7 +124,7 @@ function SignInUpForm() {
               value={formData.role}
               onChange={handleChange}
             >
-              <option value="" disabled>Select Role</option>  {/* Optional placeholder */}
+              <option value="" disabled>Select Role</option>  
               <option value="patient">Patient</option>
               <option value="expert">Expert</option>
             </Component.Input>
