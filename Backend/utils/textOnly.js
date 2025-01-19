@@ -6,7 +6,7 @@ export const textOnly = async (input) => {
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/${aiConfig.gemini.textOnlyModel}:generateContent`,
       {
-        prompt: input,  // Sending the Ayurvedic input as prompt
+        prompt: input, 
       },
       {
         headers: {

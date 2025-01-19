@@ -19,9 +19,9 @@ const getImageDataByExpertId = async (req, res) => {
     if (!userData.length) {
       return res.status(404).json({ message: 'No image data found for the given expert_id' });
     }
-    if (!imageData.length) {
-      return res.status(404).json({ message: 'No image data found for the given expert_id' });
-    }
+    // if (!imageData.length) {
+    //   return res.status(404).json({ message: 'No image data found for the given expert_id' });
+    // }
 
     res.status(200).json({imageData, userData});
   } catch (error) {

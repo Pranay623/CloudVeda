@@ -3,7 +3,6 @@ import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// Define video constraints for webcam
 const videoConstraints = {
   width: 780,
   facingMode: "user",
@@ -17,19 +16,16 @@ const Camera = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Function to capture photo for a specific category
   const capturePhoto = useCallback(async (category) => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
-      const fileName = `${category}-${Date.now()}.png`; // Generate unique file name
+      const fileName = `${category}-${Date.now()}.png`; 
 
-      // Save captured photo locally in state
       setPhotos((prevPhotos) => ({
         ...prevPhotos,
         [category]: { src: imageSrc, name: fileName },
       }));
 
-      // Convert DataURI to Blob
       const dataURItoBlob = (dataURI) => {
         const byteString = atob(dataURI.split(",")[1]);
         const ab = new ArrayBuffer(byteString.length);
@@ -44,26 +40,23 @@ const Camera = () => {
       formData.append("image", dataURItoBlob(imageSrc), fileName);
 
       try {
-        // Send image to the ML API
         const response = await axios.post(
           `http://3.237.21.65:5000/analyze_${category}`,
           formData
         );
 
-        const mlData = response.data; // Response from ML API
+        const mlData = response.data;
         setPhotoAnalysis((prevAnalysis) => ({
           ...prevAnalysis,
-          [category]: mlData, // Save ML analysis result in state
+          [category]: mlData, 
         }));
 
-        // Prepare data for backend API
         const backendData = {
           category,
           user_id: localStorage.getItem("userid"),
-          analysis: mlData, // Save ML analysis
+          analysis: mlData,
         };
 
-        // Send ML response to backend
         await axios.post("http://localhost:3000/image/ml", backendData);
 
         console.log(`Successfully saved ${category} analysis to backend.`);
@@ -74,7 +67,6 @@ const Camera = () => {
     }
   }, []);
 
-  // Function to handle submission
   const uploadImages = async () => {
     if (!photos.face || !photos.head || !photos.nails) {
       alert("Please capture all three photos.");
@@ -96,7 +88,6 @@ const Camera = () => {
       const user_id = localStorage.getItem("userid");
       formData.append("user_id", user_id);
 
-      // Send photos and analysis results to backend API
       await axios.post("http://localhost:3000/image/ml", formData);
 
       alert("Photos and analysis saved successfully!");
