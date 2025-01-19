@@ -10,20 +10,20 @@ const Expert = () => {
 
   useEffect(() => {
     // Retrieve the expert's name from localStorage
-    const name = localStorage.getItem('userName');
+    const name = localStorage.getItem('fullName');
     if (name) {
       setExpertName(name);
     }
 
     const fetchPatients = async () => {
-        const userid = localStorage.getItem('userid'); 
+        const expert_id = localStorage.getItem('userid'); 
       
         try {
           const response = await fetch('http://localhost:3000/api/image-data', {
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json',
-              'body': JSON.stringify({userid}) ,
+            //   'Content-Type': 'application/json',
+              'body': JSON.stringify({expert_id}) ,
             }
           });
       
@@ -65,11 +65,7 @@ const Expert = () => {
 
           {/* Right Section - Illustration */}
           <div className="md:w-1/2 flex justify-center items-center">
-            <img
-              src="path-to-your-illustration.jpg" // Replace with your actual image or illustration path
-              alt="Expert illustration"
-              className="w-full max-w-sm rounded-lg shadow-lg"
-            />
+           
           </div>
         </div>
 
