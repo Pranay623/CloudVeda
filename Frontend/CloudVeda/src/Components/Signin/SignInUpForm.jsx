@@ -53,11 +53,11 @@ function SignInUpForm() {
       const id = data.user_id;
       const role=data.role;
       const name=data.name;
-      console.log(data.name);
+      console.log(data);
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
-      localStorage.setItem("userName", name); 
+      localStorage.setItem("fullName", name); 
 
       if (!signin) {
         toggle(true);

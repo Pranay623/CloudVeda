@@ -15,21 +15,32 @@ const Expert = () => {
       setExpertName(name);
     }
 
-    // Fetch patients' data (you can modify the API endpoint if needed)
     const fetchPatients = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/patients');
-        if (!response.ok) {
-          throw new Error('Failed to fetch patient data');
+        const userid = localStorage.getItem('userid'); 
+      
+        try {
+          const response = await fetch('http://localhost:3000/api/image-data', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'body': JSON.stringify({userid}) ,
+            }
+          });
+      
+          if (!response.ok) {
+            throw new Error('Failed to fetch patient data');
+          }
+      
+          const data = await response.json();
+          console.log(data);
+          setPatients(data);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setIsLoading(false);
         }
-        const data = await response.json();
-        setPatients(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      }
-    };
+      };
+      
 
     fetchPatients();
   }, []);
