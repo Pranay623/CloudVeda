@@ -60,8 +60,8 @@ function SignInUpForm() {
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
-      localStorage.setItem("email",email);
-      localStorage.setItem("fullName",fullName);
+      
+
 
   
       if (!signin) {
@@ -69,6 +69,12 @@ function SignInUpForm() {
       }
 
       if (signin) {
+        if(role=="expert"){
+          navigate("/expert")
+        }
+        else{
+          navigate("/dashboard");
+        }
         navigate("/dashboard"); 
       }
     } catch (err) {

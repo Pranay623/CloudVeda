@@ -39,16 +39,14 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'uploads', // Folder name in your Cloudinary account
-    format: async (req, file) => 'jpeg', // Set the format to jpeg (optional)
-    public_id: (req, file) => file.originalname.split('.')[0], // File name (optional)
+    folder: 'uploads',
+    format: async (req, file) => 'jpeg',
+    public_id: (req, file) => file.originalname.split('.')[0],
   },
 });
 
-// Initialize Multer with the storage engine
 const upload = multer({ storage });
 
-// Example usage in a route
 const express = require('express');
 const app = express();
 
@@ -58,6 +56,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
   }
   res.status(200).send({
     message: 'File uploaded successfully',
-    fileUrl: req.file.path, // The Cloudinary URL for the uploaded file
+    fileUrl: req.file.path, 
   });
 });

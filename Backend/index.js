@@ -9,6 +9,7 @@ import mlDataRouter from './router/mlData.router.js';
 import pointsRouter from './router/points.router.js';
 import expertsRouter from './router/getExperts.js';
 import emailRoutes from './router/emailRoutes.js';
+import userDataRouter from './router/getUser.router.js';
 // import report from './router/report.router.js';
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/api', auth);
 app.use('/image', mlDataRouter);
 app.use('/image', pointsRouter);
 app.use('/api', expertsRouter);
+app.use('/api', userDataRouter);
 // app.use('/report', report);
 
 // app.use('/api', (req, res, next) => {

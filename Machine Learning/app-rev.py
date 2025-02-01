@@ -9,19 +9,16 @@ from skimage import filters
 from scipy.ndimage import gaussian_filter
 from io import BytesIO
 
-# Initialize FastAPI app
 app = FastAPI()
 
-# Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for testing, adjust as needed
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Mediapipe initialization
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 
@@ -62,7 +59,6 @@ def analyze_hairline(mask):
     hairline_status = "Receding" if hairline_position > mask.shape[1] // 3 else "Normal"
     return {"hairline_position": hairline_position, "hairline_status": hairline_status}
 
-# Hair analysis endpoint
 @app.post("/analyze_baldness")
 async def analyze_baldness(file: UploadFile = File(...)):
     contents = await file.read()
@@ -77,7 +73,6 @@ async def analyze_baldness(file: UploadFile = File(...)):
         "hairline_analysis": hairline_analysis
     })
 
-# Nail analysis functions
 def crop_nail_region(image):
     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = hands.process(rgb_image)
@@ -138,7 +133,6 @@ async def analyze_fingers(file: UploadFile = File(...)):
     else:
         return JSONResponse(content={"error": "No hand detected or wrong hand placement"}, status_code=400)
 
-# Face analysis endpoint
 @app.post("/analyze_face")
 async def analyze_face(file: UploadFile = File(...)):
     contents = await file.read()

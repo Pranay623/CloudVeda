@@ -13,6 +13,7 @@ import About from "./Components/About/About.jsx"
 
 import Profile from "./Components/Profile/Profile.jsx";
 import ThankYou from "./Components/thankyou.jsx";
+import Expert from "./Components/Expert/Expert.jsx";
 
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/chat" element={<Chatbot/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/thankyou" element={<ThankYou />} />
+        <Route path="/expert" element={<Expert />} />
         
       </Routes>
     </Router>

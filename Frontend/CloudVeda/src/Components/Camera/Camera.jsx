@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
 
-// Define video constraints for webcam
 const videoConstraints = {
   width: 780,
   facingMode: "user",
@@ -16,6 +15,7 @@ const Camera = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  
   const handleSendEmail = async () => {
     try {
       // Get email and full name from localStorage
@@ -116,10 +116,13 @@ const Camera = () => {
           wrinkles: mlData.wrinkles || "Not Available",
         };
   
+
         setPhotoAnalysis((prevAnalysis) => ({
           ...prevAnalysis,
           [category]: mlData, 
+          [category]: mlData, 
         }));
+
   
         const backendData = {
           category,
@@ -143,6 +146,7 @@ const Camera = () => {
           throw new Error("Failed to save analysis to backend.");
         }
   
+
         console.log(`Successfully saved ${category} analysis to backend.`);
       } catch (err) {
         setError("Error analyzing image or saving data to backend.");
@@ -184,7 +188,8 @@ if (!user_id || !expert_id) {
       formData.append("nails_analysis", JSON.stringify(photoAnalysis.nails));
 
 
-      // Send photos and analysis results to backend API
+
+ 
       const response = await fetch("http://localhost:3000/image/ml", {
         method: "POST",
         body: formData,
@@ -193,6 +198,7 @@ if (!user_id || !expert_id) {
       if (!response.ok) {
         throw new Error("Failed to upload images.");
       }
+
 
       alert("Photos and analysis saved successfully!");
       navigate("/thankyou");

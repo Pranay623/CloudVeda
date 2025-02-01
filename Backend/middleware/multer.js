@@ -1,17 +1,15 @@
 import multer from 'multer';
 import path from 'path';
 
-// Set up storage for files (images and video)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './uploads');  // Specify the folder where files will be stored
+    cb(null, './uploads');  
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));  // Create a unique filename
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
-// Define allowed file types for images and video
 const fileFilter = (req, file, cb) => {
   const filetypes = /jpeg|jpg|png|gif|mp4|mkv/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -24,13 +22,12 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Multer configuration to accept multiple image files and a single video file
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
 }).fields([
-  { name: 'images', maxCount: 10 },  // Accept up to 10 images
-  { name: 'video', maxCount: 1 },  // Accept only 1 video
+  { name: 'images', maxCount: 10 }, 
+  { name: 'video', maxCount: 1 }, 
 ]);
 
 export default upload;

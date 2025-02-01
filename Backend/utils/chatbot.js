@@ -60,28 +60,27 @@
 //   };
   
 
-const axios = require('axios');
+// const axios = require('axios');
 
-const geminiApiKey = 'YOUR_API_KEY';  // Replace with your generated API key
-const geminiEndpoint = 'https://api.example.com/v1/gemini';  // Replace with actual Gemini endpoint
+// const geminiApiKey = 'YOUR_API_KEY'; 
+// const geminiEndpoint = 'https://api.example.com/v1/gemini'; 
 
-async function getGeminiResponse(inputData) {
-    try {
-        const response = await axios.post(geminiEndpoint, {
-            headers: {
-                'Authorization': `Bearer ${geminiApiKey}`,
-                'Content-Type': 'application/json'
-            },
-            data: {
-                prompt: inputData,
-                // Add any other parameters your endpoint requires
-            }
-        });
+// async function getGeminiResponse(inputData) {
+//     try {
+//         const response = await axios.post(geminiEndpoint, {
+//             headers: {
+//                 'Authorization': `Bearer ${geminiApiKey}`,
+//                 'Content-Type': 'application/json'
+//             },
+//             data: {
+//                 prompt: inputData,
+//             }
+//         });
 
-        console.log('Gemini Response:', response.data);
-    } catch (error) {
-        console.error('Error calling Gemini API:', error);
-    }
-}
+//         console.log('Gemini Response:', response.data);
+//     } catch (error) {
+//         console.error('Error calling Gemini API:', error);
+//     }
+// }
 
-getGeminiResponse("Give me a creative idea for a tech startup");
+// getGeminiResponse("Give me a creative idea for a tech startup");
