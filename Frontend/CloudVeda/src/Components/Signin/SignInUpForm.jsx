@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignInUpForm() {
   const navigate = useNavigate();
-  const [signin, toggle] = useState(true); // Toggle between sign-in and sign-up
+  const [signin, toggle] = useState(true); 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -56,12 +56,14 @@ function SignInUpForm() {
       const id = data.user_id;
       const fullName = data.fullName;
       const email = data.email;
+      const role = data.role;
 
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
-      
-
+      localStorage.setItem("email",email);
+      localStorage.setItem("fullName",fullName);
+      localStorage.setItem("role",role)
 
   
       if (!signin) {
@@ -69,13 +71,11 @@ function SignInUpForm() {
       }
 
       if (signin) {
-        if(role=="expert"){
+        if(role == 'expert'){
           navigate("/expert")
         }
-        else{
-          navigate("/dashboard");
-        }
-        navigate("/dashboard"); 
+        else
+        {navigate("/dashboard"); }
       }
     } catch (err) {
       setError(err.message || "Failed to process the request.");
