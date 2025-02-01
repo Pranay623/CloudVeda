@@ -70,14 +70,12 @@ const Camera = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       const fileName = `${category}-${Date.now()}.png`; 
-  
-    
-
+ 
       setPhotos((prevPhotos) => ({
         ...prevPhotos,
         [category]: { src: imageSrc, name: fileName },
       }));
-
+  
       const dataURItoBlob = (dataURI) => {
         const byteString = atob(dataURI.split(",")[1]);
         const ab = new ArrayBuffer(byteString.length);
@@ -92,8 +90,6 @@ const Camera = () => {
       formData.append("image", dataURItoBlob(imageSrc), fileName);
   
       try {
-
-        // Send image to the ML API
         const response = await fetch(
           `http://127.0.0.1:5000/analyze_${category}`,
           {
@@ -106,9 +102,9 @@ const Camera = () => {
           throw new Error("Failed to analyze image.");
         }
   
-        const mlData = await response.json(); // Response from ML API
+        const mlData = await response.json();
   
-        // Prepare the ML data in the required format
+
         const analysisData = {
           dark_circles: mlData.dark_circles || "Not Available",
           expression: mlData.expression || "Not Available",
@@ -124,21 +120,20 @@ const Camera = () => {
         setPhotoAnalysis((prevAnalysis) => ({
           ...prevAnalysis,
           [category]: mlData, 
+          [category]: mlData, 
         }));
 
   
-        // Prepare data for backend API in the format
         const backendData = {
           category,
           user_id: localStorage.getItem("userid"),
           expert_id: localStorage.getItem("activeExpertId"),
           hair_analysis: mlData.hair_analysis || {},
           hairline_analysis: mlData.hairline_analysis || {},
-          skin_analysis: analysisData, // Save ML analysis in the correct format
+          skin_analysis: analysisData, 
           nail_analysis: mlData.nail_analysis || {},
         };
   
-        // Send ML response to backend
         const backendResponse = await fetch("http://localhost:3000/image/ml", {
           method: "POST",
           headers: {
@@ -160,6 +155,7 @@ const Camera = () => {
     }
   }, []);
   
+
 
   const uploadImages = async () => {
     if (!photos.face || !photos.head || !photos.nails) {
@@ -270,7 +266,7 @@ if (!user_id || !expert_id) {
 
       <button
     className="m-2 mt-6 px-6 py-3 bg-[#025A4E] text-white rounded-md hover:bg-[#018d75] focus:outline-none transition duration-300 ease-in-out"
-    onClick={handleSendEmail} // Attach the function to the button
+    onClick={handleSendEmail} 
   >
     Submit Photos
   </button>

@@ -122,6 +122,7 @@ const Chatbot = () => {
   };
 
   const submitData = () => {
+
     if (typeof window !== "undefined") {
       const user_id = localStorage.getItem("userid");
       const expert_id = localStorage.getItem("activeExpertId");
@@ -187,6 +188,7 @@ const Chatbot = () => {
           <button
             className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md"
             onClick={submitData} 
+   
           >
             Submit Data
           </button>

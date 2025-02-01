@@ -1,7 +1,6 @@
 import HealthAnalysis from '../models/response.js';
 import UserData from '../models/UserData.js';
 
-// Get all documents by expert_id
 const getImageDataByExpertId = async (req, res) => {
   const { expert_id } = req.body;
   console.log(expert_id)
@@ -11,7 +10,7 @@ const getImageDataByExpertId = async (req, res) => {
   }
 
   try {
-    // Fetch image data matching the expert_id
+
     const imageData = await HealthAnalysis.find({ expert_id });
     console.log(imageData)
     const userData = await UserData.find({ expert_id }).populate('user_id expert_id');

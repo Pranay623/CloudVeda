@@ -14,10 +14,12 @@ function SignInUpForm() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -25,6 +27,7 @@ function SignInUpForm() {
     console.log(formData); 
 
 
+    // Basic validation
     if (!formData.email || !formData.password || (!signin && !formData.name)) {
       setError("Please fill in all fields.");
       return;
@@ -51,28 +54,28 @@ function SignInUpForm() {
 
       const token = data.token;
       const id = data.user_id;
-
       const fullName = data.fullName;
       const email = data.email;
+      const role = data.role;
 
       setMessage(`Success! Token: ${token}`);
       localStorage.setItem("authToken", token);
       localStorage.setItem("userid", id);
       localStorage.setItem("email",email);
       localStorage.setItem("fullName",fullName);
+      localStorage.setItem("role",role)
 
-
+  
       if (!signin) {
         toggle(true);
       }
 
       if (signin) {
-        if(role=="expert"){
+        if(role == 'expert'){
           navigate("/expert")
         }
-        else{
-          navigate("/dashboard");
-        }
+        else
+        {navigate("/dashboard"); }
       }
     } catch (err) {
       setError(err.message || "Failed to process the request.");
@@ -88,6 +91,7 @@ function SignInUpForm() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         {message && <p className="text-green-500 text-center">{message}</p>}
 
+        {/* Sign Up Form */}
         <Component.SignUpContainer signinIn={signin}>
           <Component.Form className="p-8" onSubmit={handleSubmit}>
             <Component.Title className="text-2xl font-bold mb-4">
@@ -121,12 +125,12 @@ function SignInUpForm() {
             />
             <Component.Input
               className="w-full p-2 mb-4 border border-gray-300 rounded"
-              as="select"  
+              as="select"  // To render as a dropdown
               name="role"
               value={formData.role}
               onChange={handleChange}
             >
-              <option value="" disabled>Select Role</option>
+              <option value="" disabled>Select Role</option>  
               <option value="patient">Patient</option>
               <option value="expert">Expert</option>
             </Component.Input>
@@ -139,6 +143,7 @@ function SignInUpForm() {
           </Component.Form>
         </Component.SignUpContainer>
 
+        {/* Sign In Form */}
         <Component.SignInContainer signinIn={signin}>
           <Component.Form className="p-8" onSubmit={handleSubmit}>
             <Component.Title className="text-3xl font-bold mb-4">
@@ -173,6 +178,7 @@ function SignInUpForm() {
           </Component.Form>
         </Component.SignInContainer>
 
+        {/* Overlay Panels for Sign-In/Sign-Up Toggle */}
         <Component.OverlayContainer signinIn={signin}>
           <Component.Overlay signinIn={signin}>
             <Component.LeftOverlayPanel signinIn={signin}>

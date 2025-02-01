@@ -32,8 +32,8 @@ const Dashboard = () => {
     setIsAnimating(true); 
     setTimeout(() => {
       setCurrentCard((prevCard) => (prevCard + 1) % experts.length);
-      setIsAnimating(false); 
-    }, 500); 
+      setIsAnimating(false);
+    }, 500);
   };
   
   return (
