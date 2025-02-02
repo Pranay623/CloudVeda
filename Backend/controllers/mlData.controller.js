@@ -87,10 +87,10 @@ export const mlresponse = async (req, res) => {
 export const getHealthAnalysis = async (req, res) => {
   try {
     // Extract user ID or any query parameters as needed (e.g., get by user ID or other filters)
-    const { user_id } = req.query;  // Assuming user_id is passed as a query parameter
+    const { expert_id } = req.query;  // Assuming user_id is passed as a query parameter
 
     // Fetch the health analysis data from the database
-    const healthData = await HealthAnalysis.findOne({ user_id }); // You may need to add user_id to your schema if it's not there
+    const healthData = await HealthAnalysis.findOne({ expert_id }); // You may need to add user_id to your schema if it's not there
 
     if (!healthData) {
       return res.status(404).json({ message: 'No health analysis data found for this user' });
