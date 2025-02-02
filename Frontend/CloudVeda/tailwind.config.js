@@ -16,6 +16,7 @@ module.exports = {
         slideIn: 'slideIn 0.5s ease-out forwards',
         slideOut: 'slideOut 0.5s ease-out forwards',
       },
+      
     },
   },
   plugins: [],

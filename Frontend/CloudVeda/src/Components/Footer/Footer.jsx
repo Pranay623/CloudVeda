@@ -5,7 +5,7 @@ const Footer = () => {
 const Navigate=useNavigate();
 
   return (
-    <footer className="bg-[#2D493B] text-white py-10">
+    <footer className="bg-[#2D493B] text-white py-10 w-full">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h3 className="text-lg font-semibold mb-4">Cloudveda</h3>
