@@ -48,10 +48,14 @@ const Expert = () => {
 
     fetchPatients();
   }, []);
+  
 console.log(patients.userData,"see patient")
 const data=patients.userData
 
-console.log(data?.user_id?.userName,"dekho username")
+const expertId=data?.expert_id
+console.log("dekho expert id",expertId)
+
+// console.log(data?.user_id?.userName,"dekho username")
 
 
 

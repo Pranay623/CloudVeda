@@ -2,14 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import profile from "../../assets/Profile.jpg"
 
-const Card = ({ id,data }) => {
+const Card = ({ expert }) => {
   const navigate = useNavigate();
-  console.log(data,"dekho aaya jo data h")
 
   const handleAskClick = () => {
-
+    // Store the expert ID in local storage
     localStorage.setItem("activeExpertId", expert._id);
 
+    // Navigate to the /chat route
     navigate("/chat");
   };
 
@@ -34,4 +34,4 @@ const Card = ({ id,data }) => {
   );
 };
 
-export default Card;
+export default Card;
