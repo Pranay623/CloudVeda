@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-import Card from '../Dashboard/Card';
+
+import ExpertCard from '../Dashboard/ExpertCard';
 
 const Expert = () => {
   const [expertName, setExpertName] = useState('');
   const [patients, setPatients] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     // Retrieve the expert's name from localStorage
@@ -16,15 +18,17 @@ const Expert = () => {
     }
 
     const fetchPatients = async () => {
-        const expert_id = localStorage.getItem('userid'); 
+        const expert_id = localStorage.getItem('userid');
+        console.log("")
       
         try {
           const response = await fetch('http://localhost:3000/api/image-data', {
-            method: 'GET',
+            method: 'POST',
             headers: {
-            //   'Content-Type': 'application/json',
-              'body': JSON.stringify({expert_id}) ,
-            }
+              'Content-Type': 'application/json',
+              
+            },
+            body: JSON.stringify({expert_id}),
           });
       
           if (!response.ok) {
@@ -44,6 +48,12 @@ const Expert = () => {
 
     fetchPatients();
   }, []);
+console.log(patients.userData,"see patient")
+const data=patients.userData
+
+console.log(data?.user_id?.userName,"dekho username")
+
+
 
   return (
     <>
@@ -72,14 +82,14 @@ const Expert = () => {
         {/* Bottom Section - Patient Cards */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-green-900 mb-4">Patients' Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10  sm:ml-32 md:ml-0 ">
             {isLoading ? (
               <p>Loading patients...</p>
-            ) : patients.length > 0 ? (
-              patients.map((patient) => (
-                <div key={patient.id} className="bg-white p-4 rounded-lg shadow-md">
-                  <Card patient={patient} /> {/* Assuming you have a Card component for patients */}
-                </div>
+            ) : data.length > 0 ? (
+              data.map((data) => (
+           
+                  <ExpertCard key={data?.user_id} data={data} id={data.user_id} /> 
+      
               ))
             ) : (
               <p>No patients found.</p>
